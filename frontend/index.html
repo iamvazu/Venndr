@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>portfol.io</title>
+
+    <!--CSS-->
+    <link rel="stylesheet" href="libs\bootstrap\dist\css\bootstrap.min.css">
+    <link rel="stylesheet" href="libs/MDBootstrap/css/mdb.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="libs/angular-block-ui/dist/angular-block-ui.min.css">
+
+
+    <!--Angular-->
+
+    <!-- lib -->
+    <script src="libs/angular/angular.min.js"></script>
+    <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="libs/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="libs/angular-block-ui/dist/angular-block-ui.min.js"></script>
+
+    <!-- module -->
+    <script src="js/module.js"></script>
+
+    <!-- route -->
+    <script src="js/route.js"></script>
+
+    <!-- controllers -->
+    <script src="js/controllers/MainController.js"></script>
+    <script src="js/controllers/SubmitController.js"></script>
+
+    <!-- services -->
+    <script src="js/services/SubmitService.js"></script>
+
+</head>
+
+<body ng-app="app">
+    <!-- where the main content will be injected -->
+    <div id="ui" ui-view></div>
+
+    <!-- js -->
+    <script src="libs/MDBootstrap/js/jquery-2.2.3.min.js"></script>
+    <script src="libs/MDBootstrap/js/tether.min.js"></script>
+    <script src="libs\bootstrap\dist\js\bootstrap.min.js"></script>
+    <script src="libs/MDBootstrap/js/mdb.min.js"></script>
+</body>
+
+</html>

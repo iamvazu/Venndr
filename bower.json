@@ -1,0 +1,13 @@
+{
+    "name": "portfol.io",
+    "version": "1.0.0",
+    "dependencies": {
+        "font-awesome": "latest",
+        "animate.css": "latest",
+        "angular": "latest",
+        "angular-ui-router": "latest",
+        "angular-sanitize": "latest",
+        "angular-block-ui": "latest",
+        "MDBootstrap": "latest"
+    }
+}
