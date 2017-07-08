@@ -15,6 +15,7 @@
 #ui {
     box-sizing: border-box;
     overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 /* override bootstrap navbar */
@@ -55,7 +56,6 @@
 }
 #desc {
     margin: auto;
-    overflow-y: auto;
     margin-top: 40px;
 }
 .modal-body {

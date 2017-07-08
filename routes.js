@@ -1,44 +1,43 @@
 // grab the jobseeker model
-var JobSeeker = ('./models/jobseeker');
+const JobSeeker = ('./models/jobseeker');
 
 //git 
-var jobs = require('github-jobs');
+const jobs = require('github-jobs');
+
+//functions
 
 module.exports = function (app) {
 
     // server routes ==========================================================================================================
 
-
-    // Return all jobseekrs in the db
     app.get('/api/jobseekers', function (req, res) {
-        // // get all jobseekers in the db
-        // JobSeeker.find(function(err, jobseekers) {
-
-        //     // send err
-        //     if (err) res.send(err);
-
-        //     // send back json
-        //     res.json(jobseekers);
-        // });
+        //var counter = require('./functions/counter.js')(app, 'job desc');
         jobs.find({}, function (err, results) {
-            // err
-            if (err) {
-                return console.log('Error: ', err);
-            }
+            // handle err
+            if (err) { return console.log('Error: ', err); }
             res.json(results);
             console.log('Found ' + results.length + ' jobs.');
-            // iterate thru each job and print
-            // results.forEach(function (job) {
-            //     jobs.findById(job.id, function (err, result) {
-            //         if (err) {
-            //             return console.log('Error: ', err);
-            //         }
-            //         console.log('Job description: ', result);
-            //     });
-            // });
+            let resume = ['Java', 'Javascript(jQuery)','HTML5','CSS3','C#','Python','SQL','North Central Texas Academy', 'Github'];          
+            let firstDesc = results[0].description.toLowerCase();
+            let words = firstDesc.split(" ");
+            let counter = 0;
+            let matches = {}; 
+            for (let a = 0; a < resume.length; a++) {
+                    matches[resume[a]] = 0;
+                }
+            console.log(matches);
+            console.log(results[0].company);
+            for (let r = 0; r < resume.length; r++) {
+                for (let i = 0; i < words.length; i++) {
+                    if (words[i].includes(resume[r].toLowerCase())) {
+                        counter++;
+                        matches(resume[r])++;
+                    }
+                }
+            }
+            console.log(counter);
+            console.log(matches);
         });
-        console.log('lol what');
-        //res.send('ur a bitch');
     });
 
     // frontend routes ==========================================================================================================
