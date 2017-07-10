@@ -14,7 +14,7 @@
 */
 #ui {
     box-sizing: border-box;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
     overflow-y: hidden;
 }
 
@@ -29,13 +29,13 @@
 } 
 .masthead {
     box-sizing: border-box;
-    background: url(/img/mount.png);
+    background: url(/img/colortree.webp);
     background-size: 100vw 100vh;
     background-repeat: no-repeat;
     height: 100vh;
 }
 #name {
-    color: #ffffff;
+    color: #a6c;
     font-size: 170px;
     padding-top: 60px;
     text-align: center;
@@ -74,4 +74,7 @@
 }
 .modal-info .modal-header {
     background-color: #a6c !important;
+}
+.job-card {
+    margin-top: 15px;
 }

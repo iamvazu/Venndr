@@ -3,5 +3,5 @@ angular
         //Dependencies
         'ngSanitize',
         'ui.router',
-        'blockUI'
+        'blockUI',
     ]);

@@ -3,14 +3,16 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>portfol.io</title>
+    <title>Venndr.io</title>
+
+    <!-- clean url -->
+    <base href="/">
 
     <!--CSS-->
     <link rel="stylesheet" href="libs\bootstrap\dist\css\bootstrap.min.css">
     <link rel="stylesheet" href="libs/MDBootstrap/css/mdb.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="libs/angular-block-ui/dist/angular-block-ui.min.css">
-
 
     <!--Angular-->
 
@@ -19,6 +21,9 @@
     <script src="libs/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="libs/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="libs/angular-block-ui/dist/angular-block-ui.min.js"></script>
+    <!-- PDF JS -->
+    <script src="libs/pdfjs-dist/build/pdf.js"></script>
+    <script src="libs/pdfjs-dist/build/pdf.worker.js"></script>
 
     <!-- module -->
     <script src="js/module.js"></script>
@@ -27,11 +32,13 @@
     <script src="js/route.js"></script>
 
     <!-- controllers -->
-    <script src="js/controllers/MainController.js"></script>
-    <script src="js/controllers/SubmitController.js"></script>
+    <script src="js/controllers/HomeController.js"></script>
+    <script src="js/controllers/SeekerController.js"></script>
+    <!--<script src="js/controllers/CompanyController.js"></script>-->
 
     <!-- services -->
-    <script src="js/services/SubmitService.js"></script>
+    <script src="js/services/MainService.js"></script>
+    <script src="js/services/PDFService.js"></script>
 
 </head>
 

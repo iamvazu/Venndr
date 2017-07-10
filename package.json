@@ -1,11 +1,13 @@
 {
-    "name": "portfol.io",
+    "name": "Venndr",
     "main": "server.js",
     "dependencies": {
+        "async": "^2.5.0",
         "body-parser": "~1.4.2",
         "express": "~4.5.1",
         "github-jobs": "^0.1.0",
         "method-override": "~2.0.2",
-        "mongoose": "~4.4"
+        "mongoose": "~4.4",
+        "request": "^2.81.0"
     }
 }

@@ -2,8 +2,12 @@ angular
     .module('app')
     .config(route);
 
-function route($stateProvider, $urlRouterProvider) {
+function route($stateProvider, $urlRouterProvider, $locationProvider) {
+    // catch-all
+    $urlRouterProvider.otherwise('/home');
 
+    // prettify url
+    $locationProvider.html5Mode(true);
     // routes 
     $stateProvider
 
@@ -11,17 +15,24 @@ function route($stateProvider, $urlRouterProvider) {
         .state('home', {
             url: '/home',
             templateUrl: 'views/home.html',
-            controller: 'MainController',
+            controller: 'HomeController',
             controllerAs: 'main'
         })
 
         // resume submission page
-        .state('submit', {
-            url: '/submit',
-            templateUrl: 'views/submit.html',
-            controller: 'SubmitController',
-            controllerAs: 'submit'
+        .state('seeker', {
+            url: '/work',
+            templateUrl: 'views/seeker.html',
+            controller: 'SeekerController',
+            controllerAs: 'seeker'
         })
-        // catch-all
-        $urlRouterProvider.otherwise('/home');
+
+        // for companies
+        .state('company', {
+            url: '/hire',
+            templateUrl: 'views/company.html',
+            controller: 'CompanyController',
+            controllerAs: 'company'
+        })
+
 };
