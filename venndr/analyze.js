@@ -3,7 +3,7 @@ const arrayify = require('../venndr/arrayify');
 // This function will iterate through all the job descriptions for each from the api,
 // and then talley the matches between the resume text and the job description text
 module.exports = (resDescArr, jobsObj, holyArray, callback) => {
-
+    var words = [];
     // iterate through properties in jobsObjs 
     for (var currentJob in jobsObj) {
         if (jobsObj.hasOwnProperty(currentJob)) {
@@ -23,6 +23,7 @@ module.exports = (resDescArr, jobsObj, holyArray, callback) => {
                         // bump the counter if theres a match
                         //TODO: write function to filter our prepositions like 'as' 'the' 'to'
                         counter++;
+                        words.push(resKeyWord);
                     }
                 }
             }
@@ -35,10 +36,11 @@ module.exports = (resDescArr, jobsObj, holyArray, callback) => {
             }
         }
     }
+    console.log(words);
     // sort the array by highest occurences to lowest
     holyArray.sort(function (a, b) {
         return b.occurences - a.occurences;
-    })
+    });
     // return to waterfall
     callback(null, holyArray);
 }

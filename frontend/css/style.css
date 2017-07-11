@@ -14,25 +14,78 @@
 */
 #ui {
     box-sizing: border-box;
-    /*overflow-x: hidden;*/
     overflow-y: hidden;
+    -webkit-font-smoothing: antialiased;
 }
-
-/* override bootstrap navbar */
-.navbar {
-   background-color: transparent;
-   background: transparent;
-   border-color: transparent;
+.bg-venndr {
+    background-color: #BC5473;
 }
-.navbar li { 
-    color: #ffffff; 
-} 
+.btn-venndr {
+    background-color: #fff;
+    color: #BC5473;
+    display: inline-block;
+    height: 40px;
+    line-height: 38px;
+    padding: 0 30px;
+    border-radius: 3px;
+    font-weight: 600;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .3px;
+    border: 1px solid #fff;
+    text-decoration: none;
+}
+.fat {
+    width: 100%;
+    padding: 0 20px;
+}
+.get-started {
+    margin: 40px 0 0 0;
+}
+.text-center {
+    text-align: center;    
+}
+.blurb {
+    font-size: 17px;
+    line-height: 32px;
+    font-weight: 100px;
+}
+.tagline {
+    margin: 120px 0 0 0;
+    font-weight: 100;
+    font-size: 50px;
+    line-height: 68px;
+}
+.space {
+    justify-content: space-between;
+    display: flex;
+}
+.brand {
+    font-size: 1.5rem;
+}
+.center {
+    align-items: center;
+    display: flex;
+}
+.container-v-b {
+    display: flex;
+    max-width: 1080px;
+    margin: auto;
+}
+.container-v-s {
+    max-width: 800px;
+    margin: auto;
+    widows: 100%;
+}
+.navbar-brand {
+    font-size: 1.25rem;
+    color: #fff;
+}
 .masthead {
-    box-sizing: border-box;
-    background: url(/img/colortree.webp);
-    background-size: 100vw 100vh;
-    background-repeat: no-repeat;
-    height: 100vh;
+    padding: 20px 0 90px 0;
+    overflow: hidden;
+    background-color: #BC5473;
+    color: #fff;
 }
 #name {
     color: #a6c;
