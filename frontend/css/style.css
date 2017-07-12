@@ -20,6 +20,36 @@
 .bg-venndr {
     background-color: #BC5473;
 }
+.bottom {
+    padding: 45px 0;
+    background-color: #F1C99F;
+    color: #fff;
+}
+.ad {
+    padding: 90px 0;
+}
+.ad-section {
+    width: 33%;
+    padding: 0 20px;
+}
+.ad-head {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    font-size: 30px;
+    line-height: 40px;
+    font-weight: 300;
+}
+.ad-par {
+    margin-top: 10px;
+    font-size: 17px;
+    line-height: 32px;
+    font-weight: 100;
+
+}
+.base {
+    align-items: baseline;
+}
 .btn-venndr {
     background-color: #fff;
     color: #BC5473;

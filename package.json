@@ -9,5 +9,10 @@
         "method-override": "~2.0.2",
         "mongoose": "~4.4",
         "request": "^2.81.0"
+    },
+    "devDependencies": {
+        "browser-sync": "^2.18.12",
+        "gulp": "^3.9.1",
+        "gulp-serve": "^1.4.0"
     }
 }
