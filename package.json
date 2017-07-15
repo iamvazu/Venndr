@@ -5,14 +5,13 @@
         "async": "^2.5.0",
         "body-parser": "~1.4.2",
         "express": "~4.5.1",
-        "github-jobs": "^0.1.0",
         "method-override": "~2.0.2",
         "mongoose": "~4.4",
         "request": "^2.81.0"
     },
     "devDependencies": {
-        "browser-sync": "^2.18.12",
-        "gulp": "^3.9.1",
-        "gulp-serve": "^1.4.0"
-    }
+        "connect-busboy": "0.0.2",
+        "pdfjs-dist-for-node": "^1.0.892-rc.1"
+    },
+    "false": {}
 }

@@ -18,8 +18,10 @@ function PDFService() {
                 //extract text
                 page.getTextContent().then(function (textContent) {
                     console.log(textContent);
-                    vm.concatPDF(textContent); //concat the object strs
-                    //return(textContent);
+                    let val = vm.concatPDF(textContent); //concat the object strs
+                    console.log(val);
+                    
+                    //return(val);
                 });
             });
         });
@@ -36,7 +38,7 @@ function PDFService() {
         }
         let sane = goodShit.join('');
        
-        console.log(sane);
-        
+        //console.log(sane);
+        return sane;
     }
 };

@@ -4,4 +4,5 @@ angular
         'ngSanitize',
         'ui.router',
         'blockUI',
+        'ngFileUpload'
     ]);

@@ -1,7 +1,11 @@
 // dependencies
 const async = require('async');
+var busboy = require('connect-busboy');
+var fs = require('fs');
+
 
 // venndr functions
+const scandoc = require('./venndr/scandoc');
 const getJobs = require('./venndr/getjobs');
 const cascade = require('./venndr/cascadejobs');
 
@@ -9,10 +13,10 @@ module.exports = function (app) {
 
     // server routes ==========================================================================================================
 
-    app.get('/api/worker', function (req, res) {
+    app.post('/api/worker', function (req, res) {
         //let response = worker.AnalyzeGithubJobs();
         console.log(req.query.resDesc);
-
+        //scandoc(req.query);
         async.parallel({
 
             GithubJobs: (callback) => {
@@ -31,7 +35,24 @@ module.exports = function (app) {
                     console.log('what the heck');
                     console.log(err);
                 }
-                res.send({result: data})
+                res.send({ result: data })
+            });
+        });
+    });
+
+    app.post('/api/upload', function (req, res) {
+
+        // read in the req
+        var fstream;
+        req.pipe(req.busboy);
+        req.busboy.on('file', function (fieldname, file, filename) { // download the file
+            console.log("Uploading: " + filename);
+
+            fstream = fs.createWriteStream(__dirname + '/resumes/' + filename);
+            file.pipe(fstream);
+            fstream.on('close', function () {
+                // scandoc(__dirname + '/resumes/' + filename);
+                res.send(filename);
             });
         });
     });

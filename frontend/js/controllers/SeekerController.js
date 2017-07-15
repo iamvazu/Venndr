@@ -2,18 +2,41 @@ angular
     .module('app')
     .controller('SeekerController', SeekerController);
 
-function SeekerController($scope, MainService, PDFService, blockUI) {
+function SeekerController($scope, MainService, PDFService, blockUI, Upload) {
     var vm = this;
-    let gayPDF = 'img/Resume_June PDF.pdf';
+    let pdf = 'img/Resume_June PDF.pdf';
 
-    let a = PDFService.readPDF(gayPDF);
+    //let a = PDFService.readPDF();
+   // let a = FileService.get('Resume_JunePDF.pdf');
+    let b = PDFService.readPDF('/pdf/Resume_JunePDF.pdf');
 
-    // blockUI var
+
+    vm.onFileSelect = function ($files) {
+        if ($files[0].type === 'application/pdf') {
+            console.log($files);
+            
+            //let a = PDFService.readPDF($files);
+            
+            //vm.jobs = MainService.get(a);
+
+            Upload.upload({
+                url: '/api/upload',
+                file: $files,
+            }).then(function (data, status, headers, config) {
+                // file is uploaded successfully
+                console.log(data);
+                
+            });
+        } else {
+            console.log('wrong type');
+            
+        }
+    }
     // blockUI.start();
     // let resume = 'Java Javascript Jquery Swift Python SQL Version Control React Angular Js Apple'
     // let monster = 'Software Engineer Object-Oriented Analysis, Design and Development / Relational Database Systems Innovative software engineer offering four years of experience in the full software development lifecycle – from concept through delivery of next-generation applications and customizable solutions. Expert in advanced development methodologies, tools and processes contributing to the design and rollout of cutting-edge software applications. Known for excellent troubleshooting skills – able to analyze code and engineer well-researched, cost-effective and responsive solutions. Technical Tools Java, JavaScript, .Net, XML, J2EE, HTML, TCP/IP, REST, SOAP, SOA, Visual Studio .Net, Eclipse, SQL, MS SQL Server, MySQL, JUnit, jQuery, C, C++, Tomcat, Spring Framework, Hibernate, Maven, JDeveloper, WebLogic, IIS, Google Web Toolkit and more';
 
-    // vm.jobs = MainService.get('/api/worker', monster);
+    // vm.jobs = MainService.get(monster);
     // blockUI.stop();
 
     // console.log(vm.jobs);

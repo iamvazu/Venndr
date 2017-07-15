@@ -1,14 +1,16 @@
 {
-    "name": "portfol.io",
-    "version": "1.0.0",
-    "dependencies": {
-        "font-awesome": "latest",
-        "animate.css": "latest",
-        "angular": "latest",
-        "angular-ui-router": "latest",
-        "angular-sanitize": "latest",
-        "angular-block-ui": "latest",
-        "MDBootstrap": "latest",
-        "pdfjs-dist": "latest"
-    }
+  "name": "portfol.io",
+  "version": "1.0.0",
+  "dependencies": {
+    "font-awesome": "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-ui-router": "latest",
+    "angular-sanitize": "latest",
+    "angular-block-ui": "latest",
+    "MDBootstrap": "latest",
+    "pdfjs-dist": "latest",
+    "ng-file-upload": "^12.2.13",
+    "ng-file-upload-shim": "^12.2.13"
+  }
 }
