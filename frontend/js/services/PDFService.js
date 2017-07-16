@@ -21,7 +21,7 @@ function PDFService() {
                     let val = vm.concatPDF(textContent); //concat the object strs
                     console.log(val);
                     
-                    //return(val);
+                    return(val);
                 });
             });
         });

@@ -4,16 +4,18 @@ const async = require('async');
 //venndr
 const analyze = require('../venndr/analyze');
 const arrayify = require('../venndr/arrayify');
+const binarysync = require('../venndr/binarysync');
 
-module.exports = (resDescStr, jobSiteObj, cb) => {
-    const resDescArr = arrayify(resDescStr);
+module.exports = (resArr, jobSiteObj, callbackFunction) => {
+    console.log('in cascade');
+    
     let holyArray = [];
     async.waterfall([
         // Github Jobs
         function (callback) {
-            analyze(resDescArr, jobSiteObj.GithubJobs, holyArray, callback);
+            binarysync(resArr, jobSiteObj.GithubJobs, callback);
         }
     ],
-        cb // perform cb function (routes.js)
+        callbackFunction // perform callbackFunction (routes.js)
     ); 
 }

@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 var busboy = require('connect-busboy');
+const binary = require('./venndr/binarysync');
+const getJobs = require('./venndr/getjobs');
+const async = require('async');
+
 
 //config 
 const db = require('./config/db');
@@ -26,7 +30,6 @@ app.use(methodOverride('X-HTTP-Method-Overrride'));
 //set the frontend files location
 app.use(express.static(__dirname + '/frontend'));
 app.use('/pdf', express.static(__dirname + '/resumes'));
-
 
 //apply the routes
 require('./routes')(app);

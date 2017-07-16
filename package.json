@@ -11,7 +11,9 @@
     },
     "devDependencies": {
         "connect-busboy": "0.0.2",
-        "pdfjs-dist-for-node": "^1.0.892-rc.1"
+        "eslint": "^4.2.0",
+        "keyword-extractor": "0.0.14",
+        "wordpos": "^1.1.5"
     },
     "false": {}
 }

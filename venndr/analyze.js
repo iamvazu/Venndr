@@ -32,11 +32,11 @@ module.exports = (resDescArr, jobsObj, holyArray, callback) => {
                 // add this obj to the holy array
                 holyArray.push(jobsObj[currentJob]);
                 jobsObj[currentJob]['occurences'] = counter;
-                console.log(jobsObj[currentJob]['occurences']);
+                //console.log(jobsObj[currentJob]['occurences']);
             }
         }
     }
-    console.log(words);
+   // console.log(words);
     // sort the array by highest occurences to lowest
     holyArray.sort(function (a, b) {
         return b.occurences - a.occurences;
