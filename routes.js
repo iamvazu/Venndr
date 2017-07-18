@@ -18,7 +18,7 @@ module.exports = function (app) {
         //let response = worker.AnalyzeGithubJobs();
         console.log(req.query.resDesc);
         //console.log(`we in boi`)
-        res.send(arrayify(req.query.resDesc));
+       // res.send(arrayify(req.query.resDesc));
         //scandoc(req.query);
         async.parallel({
 
@@ -76,7 +76,8 @@ module.exports = function (app) {
 
         }, function (err, results) {
             if (err) console.log(err);
-
+            console.log('got the jobs');
+            
             //this is where the list is stored
             cascade(resArr, results, function (err, data) {
                 // handle err

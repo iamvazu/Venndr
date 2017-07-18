@@ -10,7 +10,7 @@ module.exports = function (resArr, jobsObj, callback) {
             // concurrents.push(function () {
             //     binarySearch('wt heck!!');
             // })
-            concurrents[jobsObj[currentJob].company] = function() {console.log('wat boi');  }
+            //concurrents[jobsObj[currentJob].company] = function() {console.log('wat boi');  }
         }
     }
     console.log(concurrents);
