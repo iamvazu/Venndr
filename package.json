@@ -10,7 +10,7 @@
         "request": "^2.81.0"
     },
     "devDependencies": {
-        "connect-busboy": "0.0.2",
+        "busboy": "0.0.2",
         "eslint": "^4.2.0",
         "keyword-extractor": "0.0.14",
         "wordpos": "^1.1.5"

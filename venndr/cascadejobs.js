@@ -2,7 +2,7 @@
 const async = require('async');
 
 //venndr
- const analyze = require('../venndr/analyze');
+const analyze = require('../venndr/analyze');
 const arrayify = require('../venndr/arrayify');
 
 module.exports = (resArr, jobSiteObj, callbackFunction) => {
@@ -12,7 +12,7 @@ module.exports = (resArr, jobSiteObj, callbackFunction) => {
     async.waterfall([
         // Github Jobs
         function (callback) {
-            analyze(resArr, jobSiteObj.GithubJobs, holyArray, callback);
+            sync(resArr, jobSiteObj.GithubJobs, callback);
         }
     ],
         callbackFunction // perform callbackFunction (routes.js)
@@ -20,8 +20,7 @@ module.exports = (resArr, jobSiteObj, callbackFunction) => {
 }
 
 function sync(resArr, jobsObj, callback) {
-    console.log('we in boi');
-    console.log(arrayify);
+    console.log('we in sync boi');
 
    // let concurrents = asyncArray(jobsObj);
     
@@ -87,6 +86,7 @@ function binarySearch(resArr, jobArr) {
                 
                 //reassign the minIndex to second half of the array
                 maxIndex = currentIndex - 1;
+                console.log('taking less side');
                 
 
                 //check if curJobKeyword is > curResKeyword
@@ -94,6 +94,8 @@ function binarySearch(resArr, jobArr) {
 
                 //reassign the max index to the end of the first half
                 minIndex = currentIndex + 1;
+                console.log('taking more side');
+                
                 
             } else {
                 return 'heck';

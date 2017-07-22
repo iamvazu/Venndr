@@ -1,6 +1,6 @@
 // dependencies
 const async = require('async');
-var busboy = require('connect-busboy');
+//var busboy = require('connect-busboy');
 var fs = require('fs');
 
 
@@ -47,17 +47,17 @@ module.exports = function (app) {
 
         // read in the req
         var fstream;
-        req.pipe(req.busboy);
-        req.busboy.on('file', function (fieldname, file, filename) { // download the file
-            console.log("Uploading: " + filename);
+        //req.pipe(req.busboy);
+        // req.busboy.on('file', function (fieldname, file, filename) { // download the file
+        //     console.log("Uploading: " + filename);
 
-            fstream = fs.createWriteStream(__dirname + '/resumes/' + filename);
-            file.pipe(fstream);
-            fstream.on('close', function () {
-                // scandoc(__dirname + '/resumes/' + filename);
-                res.send(filename);
-            });
-        });
+        //     fstream = fs.createWriteStream(__dirname + '/resumes/' + filename);
+        //     file.pipe(fstream);
+        //     fstream.on('close', function () {
+        //         // scandoc(__dirname + '/resumes/' + filename);
+        //         res.send(filename);
+        //     });
+        // });
     });
     app.get('/api/test', function (req, res) {
         let resDesc = req.query.resDesc;
