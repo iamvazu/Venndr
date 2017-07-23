@@ -4,13 +4,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const mongoose = require('mongoose');
-var busboy = require('connect-busboy');
-const binary = require('./venndr/binarysync');
-const getJobs = require('./venndr/getjobs');
-const async = require('async');
+const busboy = require('connect-busboy');
 
 
-//config 
+//config db
 const db = require('./config/db');
 
 //port

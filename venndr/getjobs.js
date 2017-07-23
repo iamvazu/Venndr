@@ -12,8 +12,7 @@ module.exports = (url, resArr, callback) => {
             callback(true);
             return;
         }
-        // finish the callback w the results from the api
+        // do the keyword compare
         match(resArr, JSON.parse(body), callback);
-        //callback(false, a);
     });
 }

@@ -1,8 +1,6 @@
-// dependencies
 const async = require('async');
 
 //venndr
-const analyze = require('../venndr/analyze');
 const arrayify = require('../venndr/arrayify');
 
 module.exports = (resArr, jobPostingsArr, callbackFunction) => {
