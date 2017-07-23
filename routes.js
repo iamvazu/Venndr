@@ -6,42 +6,15 @@ var fs = require('fs');
 
 // venndr functions
 const getJobs = require('./venndr/getjobs');
-const cascade = require('./venndr/cascadejobs');
+const match = require('./venndr/match');
 const arrayify = require('./venndr/arrayify');
-const binarySync = require('./venndr/binarysync');
+// const binarySync = require('../venndr/binarysync');
+
+const secret = require('./config/secret');
 
 module.exports = function (app) {
 
     // server routes ==========================================================================================================
-
-    app.get('/api/worker', function (req, res) {
-        //let response = worker.AnalyzeGithubJobs();
-        console.log(req.query.resDesc);
-        //console.log(`we in boi`)
-       // res.send(arrayify(req.query.resDesc));
-        //scandoc(req.query);
-        async.parallel({
-
-            GithubJobs: function (callback) {
-                getJobs('https://jobs.github.com/positions.json', callback);
-            },
-            Glassdoor: function (callback) {
-                setTimeout(function () {
-                    callback(null, 2);
-                }, 100);
-            }
-        }, function (err, results) {
-            if (err) console.log(err);
-            // this is where the list is stored
-            cascade(req.query.resDesc, results, function (err, data) {
-                if (err) {
-                    console.log('what the heck');
-                    console.log(err);
-                }
-                res.send({ result: data })
-            });
-        });
-    });
 
     app.post('/api/upload', function (req, res) {
 
@@ -60,34 +33,25 @@ module.exports = function (app) {
         // });
     });
     app.get('/api/test', function (req, res) {
-        let resDesc = req.query.resDesc;
-
         // get keyword array of the resume
-        let resArr = arrayify(resDesc);
-        // res.send(d);
-        console.log('we here boi');
+        let resArr = arrayify(req.query.resDesc);
         
         // concurrently make a request to each api 
         async.parallel({
 
             GithubJobs: function (callback) {
-                getJobs('https://jobs.github.com/positions.json', callback);
+                getJobs(secret.GithubJobs, resArr, callback);
             }
 
         }, function (err, results) {
             if (err) console.log(err);
-            console.log('got the jobs');
-            
-            //this is where the list is stored
-            cascade(resArr, results, function (err, data) {
-                // handle err
-                if (err) {
-                    console.log('what the heck');
-                    console.log(err);
-                }
+            res.send(results);
+            // match(resArr, results, function (err, data) {
+            //     // handle err
+            //     if (err) console.log(err);
 
-                res.send({ result: data })
-            });
+            //     res.send({ result: data })
+            // });
         });
     });
     // frontend routes ==========================================================================================================
