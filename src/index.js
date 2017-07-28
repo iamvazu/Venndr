@@ -1,2 +1,7 @@
 angular
-  .module('app', ['ui.router']);
+    .module('app', [
+        'ngSanitize',
+        'ui.router',
+        'blockUI',
+        'ngFileUpload'
+    ]);

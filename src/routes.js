@@ -1,15 +1,37 @@
 angular
   .module('app')
-  .config(routesConfig);
+  .config(route);
 
-/** @ngInject */
-function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
-  $locationProvider.html5Mode(true).hashPrefix('!');
-  $urlRouterProvider.otherwise('/');
+function route($stateProvider, $urlRouterProvider, $locationProvider) {
+  // catch-all
+  $urlRouterProvider.otherwise('/home');
 
+  // prettify url
+  $locationProvider.html5Mode(true);
+  // routes
   $stateProvider
-    .state('app', {
-      url: '/',
-      component: 'app'
+
+    // home page
+    .state('home', {
+      url: '/home',
+      templateUrl: 'app/home/home.html',
+      controller: 'HomeController',
+      controllerAs: 'main'
+    })
+
+    // resume submission page
+    .state('match', {
+      url: '/match',
+      templateUrl: 'app/match/match.html',
+      controller: 'SeekerController',
+      controllerAs: 'seeker'
     });
+
+  // // for companies
+  // .state('hire', {
+  //     url: '/hire',
+  //     templateUrl: 'src/company/company.html',
+  //     controller: 'CompanyController',
+  //     controllerAs: 'company'
+  // }
 }
