@@ -25,7 +25,7 @@ app.use(methodOverride('X-HTTP-Method-Overrride'));
 
 
 //set the frontend files location
-app.use(express.static(__dirname + '/frontend'));
+app.use(express.static(__dirname + '/src'));
 app.use('/pdf', express.static(__dirname + '/resumes'));
 
 //apply the routes

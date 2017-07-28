@@ -1,6 +1,6 @@
-/config/
-/frontend/libs/
-/node_modules/
-/package-lock.json
-/frontend/img
-/.idea
+.tmp/
+coverage/
+dist/
+node_modules/
+bower_components/
+config/
