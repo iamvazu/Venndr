@@ -17,21 +17,22 @@ module.exports = function (app) {
     // server routes ==========================================================================================================
 
     app.post('/api/upload', function (req, res) {
-
+//whatjlkj
         // read in the req
         var fstream;
-        //req.pipe(req.busboy);
-        // req.busboy.on('file', function (fieldname, file, filename) { // download the file
-        //     console.log("Uploading: " + filename);
+        req.pipe(req.busboy);
+        req.busboy.on('file', function (fieldname, file, filename) { // download the file
+            console.log("Uploading: " + filename);
 
-        //     fstream = fs.createWriteStream(__dirname + '/resumes/' + filename);
-        //     file.pipe(fstream);
-        //     fstream.on('close', function () {
-        //         // scandoc(__dirname + '/resumes/' + filename);
-        //         res.send(filename);
-        //     });
-        // });
+            fstream = fs.createWriteStream(__dirname + '/resumes/' + filename);
+            file.pipe(fstream);
+            fstream.on('close', function () {
+                // scandoc(__dirname + '/resumes/' + filename);
+                res.send(filename);
+            });
+        });
     });
+    
     app.get('/api/test', function (req, res) {
         // get keyword array of the resume
         let resArr = arrayify(req.query.resDesc);
@@ -58,7 +59,8 @@ module.exports = function (app) {
 
     // catch all route to send user to index
     app.get('*', function (req, res) {
-        res.sendfile('./frontend/index.html'); // loads the index.html file
+        res.sendfile('./dist/index.html'); // loads the index.html file
+        console.log('file sent');
     });
 
 };

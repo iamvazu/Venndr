@@ -215,7 +215,7 @@ html, body {
         }
         
         .view {
-            background: url('img/dtse19.jpg')no-repeat center center fixed;
+            background: url('./img/dtse19.jpg')no-repeat center center fixed;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -269,3 +269,12 @@ html, body {
         .inputfile + label * {
 	        pointer-events: none;
         }
+        // override mdb form text input
+        input[type=text]:focus:not([readonly]) {
+            border-bottom: 1px solid @primary;
+            box-shadow: 0 1px 0 0 @primary;
+        }
+        input[type=text]:focus:not([readonly]) + label {
+            color: @primary;
+        }
+

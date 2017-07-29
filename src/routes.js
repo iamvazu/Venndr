@@ -16,7 +16,7 @@ function route($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/home',
       templateUrl: 'app/home/home.html',
       controller: 'HomeController',
-      controllerAs: 'main'
+      controllerAs: 'home'
     })
 
     // resume submission page
