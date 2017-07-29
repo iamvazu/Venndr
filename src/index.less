@@ -12,6 +12,13 @@
     light: #F9CF00
     tangerine: #F19F4D
 */
+
+@primary: #BC5473;
+@primary-light: #EEB5C6;
+@primary-dark: #76112F;
+
+@secondary: #F1C99F;
+
 html, body {
     margin: 0;
     height: 100%;
@@ -165,3 +172,100 @@ html, body {
 .job-card {
     margin-top: 15px;
 }
+
+
+
+
+//HOME
+  html,
+        body,
+        .view {
+            height: 100%;
+        }
+        /* Navigation*/
+        
+        .navbar {
+            background-color: transparent;
+        }
+        
+        .scrolling-navbar {
+            -webkit-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            -moz-transition: background .5s ease-in-out, padding .5s ease-in-out;
+            transition: background .5s ease-in-out, padding .5s ease-in-out;
+        }
+        
+        .top-nav-collapse {
+            background-color: #1C2331;
+        }
+        
+        footer.page-footer {
+            background-color: #1C2331;
+            margin-top: -1px;
+        }
+        
+        @media only screen and (max-width: 768px) {
+            .navbar {
+                background-color: #1C2331;
+            }
+        }
+        /*Call to action*/
+        
+        .flex-center {
+            color: #fff;
+        }
+        
+        .view {
+            background: url('img/dtse19.jpg')no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        .left-info {
+            text-align: left;
+            padding-top: 5%;
+            padding-bottom: 5%;
+        }
+        .left-info-p {
+            font-weight: 100;
+        }
+
+        // file input styling, display: none will 
+        // not work here because the input value
+        // will never get sent to the server
+        .inputfile {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
+        inputfile-1 + label {
+            background-color: @primary !important;
+        }
+        // labels bound to an input type can actually
+        // be clicked as if they are the input itself!
+        .inputfile + label {
+            max-width: 80%;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            padding: .625rem 1.25rem;
+            font-size: 1.25em;
+            font-weight: 400;
+            color: @primary-light;
+            background-color: @primary;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .inputfile:focus + label,
+        .inputfile + label:hover {
+            background-color: @primary-dark;
+        }
+        .inputfile:focus + label {
+            outline: 1px dotted #000;
+            outline: -webkit-focues-ring-color auto 5px;
+        }
+        .inputfile + label * {
+	        pointer-events: none;
+        }
