@@ -8,16 +8,15 @@ var fs = require('fs');
 const getJobs = require('./venndr/getjobs');
 const match = require('./venndr/match');
 const arrayify = require('./venndr/arrayify');
-// const binarySync = require('../venndr/binarysync');
 
 const secret = require('./config/secret');
 
-module.exports = function (app) {
+module.exports = function (app, staticDir) {
 
     // server routes ==========================================================================================================
 
     app.post('/api/upload', function (req, res) {
-//whatjlkj
+        console.log('upload request');
         // read in the req
         var fstream;
         req.pipe(req.busboy);
@@ -27,7 +26,6 @@ module.exports = function (app) {
             fstream = fs.createWriteStream(__dirname + '/resumes/' + filename);
             file.pipe(fstream);
             fstream.on('close', function () {
-                // scandoc(__dirname + '/resumes/' + filename);
                 res.send(filename);
             });
         });
@@ -59,7 +57,7 @@ module.exports = function (app) {
 
     // catch all route to send user to index
     app.get('*', function (req, res) {
-        res.sendfile('./dist/index.html'); // loads the index.html file
+        res.sendfile(__dirname + staticDir + '/index.html'); // loads the index.html file
         console.log('file sent');
     });
 

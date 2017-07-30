@@ -23,8 +23,13 @@ function route($stateProvider, $urlRouterProvider, $locationProvider) {
     .state('match', {
       url: '/match',
       templateUrl: 'app/match/match.html',
-      controller: 'SeekerController',
-      controllerAs: 'seeker'
+      controller: 'MatchController',
+      controllerAs: 'MatchController',
+      params: {
+        location: null,
+        field: null,
+        filename: null
+      }
     });
 
   // // for companies

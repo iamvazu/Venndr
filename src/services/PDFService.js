@@ -2,7 +2,7 @@ angular
     .module('app')
     .service('PDFService', PDFService);
 
-function PDFService(PDFJS) {
+function PDFService() {
     var vm = this;
 
     // reads in pdf and extracts the text
@@ -29,13 +29,14 @@ function PDFService(PDFJS) {
     // this will concat the strs of each obj in the array
     vm.concatPDF = function (pdfObj) {
         const items = pdfObj.items;
-        var goodShit = [];
+        var buildArr = [];
         for (var i = 0, len = items.length; i < len; i++) {
             // console.log(items[i].str);
-            goodShit.push(items[i].str);
+            buildArr.push(items[i].str);
         }
-        var sane = goodShit.join('');
-        // console.log(sane);
-        return sane;
+        // now join the array element together
+        var finalStr = buildArr.join('');
+        
+        return finalStr;
     };
 }
