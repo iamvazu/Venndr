@@ -20,9 +20,8 @@ module.exports = function (app, staticDir) {
         // read in the req
         var fstream;
         req.pipe(req.busboy);
-        req.busboy.on('file', function (fieldname, file, filename) { // download the file
+        req.busboy.on('file', function (fieldname, file, filename) { 
             console.log("Uploading: " + filename);
-
             fstream = fs.createWriteStream(__dirname + '/resumes/' + filename);
             file.pipe(fstream);
             fstream.on('close', function () {
@@ -36,8 +35,8 @@ module.exports = function (app, staticDir) {
         let resArr = arrayify(req.query.resDesc);
         
         // concurrently make a request to each api 
+        // TODO: Add more apis
         async.parallel({
-
             GithubJobs: function (callback) {
                 getJobs(secret.GithubJobs, resArr, callback);
             }
@@ -45,12 +44,6 @@ module.exports = function (app, staticDir) {
         }, function (err, results) {
             if (err) console.log(err);
             res.send(results);
-            // match(resArr, results, function (err, data) {
-            //     // handle err
-            //     if (err) console.log(err);
-
-            //     res.send({ result: data })
-            // });
         });
     });
     // frontend routes ==========================================================================================================
@@ -58,7 +51,7 @@ module.exports = function (app, staticDir) {
     // catch all route to send user to index
     app.get('*', function (req, res) {
         res.sendfile(__dirname + staticDir + '/index.html'); // loads the index.html file
-        console.log('file sent');
+        console.log('index.html sent');
     });
 
 };

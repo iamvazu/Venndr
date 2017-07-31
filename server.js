@@ -48,7 +48,7 @@ console.log('PORT: ' + port);
 console.log('ENV: ' + env.name);
 console.log('SRC: ' + env.dir);
 
-// turn off my console.logs if in prod
+// turn off my console.logs if in prod by reassigning the function
 if (!env.debug) console.log = function () {};
 
 // expose the express object

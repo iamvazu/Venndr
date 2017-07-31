@@ -9,12 +9,9 @@ function PDFService() {
     // PDFJS.getTextContent returns an object kms
     // see vm.concatPDF
     vm.readPDF = function (pdfPath) {
-        // get load resume from path
         var loading = PDFJS.getDocument(pdfPath);
         loading.promise.then(function (pdf) {
-            // load the first page from pdf
             pdf.getPage(1).then(function (page) {
-                // extract text
                 page.getTextContent().then(function (textContent) {
                    // console.log(textContent);
                     var val = vm.concatPDF(textContent); // concat the object strs
@@ -24,7 +21,6 @@ function PDFService() {
             });
         });
     };
-
     // PDFJS.getTextContent returns an obj
     // this will concat the strs of each obj in the array
     vm.concatPDF = function (pdfObj) {
