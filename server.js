@@ -50,7 +50,6 @@ console.log('SRC: ' + env.dir);
 
 // turn off my console.logs if in prod
 if (!env.debug) console.log = function () {};
-console.log('im working!');
 
 // expose the express object
 exports = module.exports = app;

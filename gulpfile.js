@@ -3,6 +3,20 @@ const HubRegistry = require('gulp-hub');
 const browserSync = require('browser-sync');
 const conf = require('./conf/gulp.conf');
 
+// tells me the current env
+gulp.task('env', function() {
+  console.log(process.env.NODE_ENV);
+});
+// Set NODE_ENV to 'development'
+gulp.task('env:dev', function () {
+  process.env.NODE_ENV = 'DEVELOPMENT';
+});
+
+// Set NODE_ENV to 'production'
+gulp.task('env:prod', function () {
+  process.env.NODE_ENV = 'PRODUCTION';
+});
+
 // Load some files into the registry
 const hub = new HubRegistry([conf.path.tasks('*.js')]);
 
