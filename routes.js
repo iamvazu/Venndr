@@ -6,7 +6,6 @@ var fs = require('fs');
 
 // venndr functions
 const getJobs = require('./venndr/getjobs');
-const match = require('./venndr/match');
 const arrayify = require('./venndr/arrayify');
 
 const secret = require('./config/secret');
@@ -33,7 +32,6 @@ module.exports = function (app, staticDir) {
     app.get('/api/test', function (req, res) {
         // get keyword array of the resume
         let resArr = arrayify(req.query.resDesc);
-        
         // concurrently make a request to each api 
         // TODO: Add more apis
         async.parallel({
