@@ -1,0 +1,50 @@
+
+@import 'color.less';
+
+// file upload btn
+.inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+    inputfile-1 + label {
+        background-color: @color-primary-0 !important;
+    }
+
+    .inputfile + label {
+        max-width: 80%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: .625rem 1.25rem;
+        font-size: 1.25em;
+        font-weight: 400;
+        color: @color-primary-4;
+        background-color: @color-primary-0;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .inputfile:focus + label,
+    .inputfile + label:hover {
+        background-color: @color-primary-2;
+    }
+    .inputfile:focus + label {
+        outline: 1px dotted #000;
+        outline: -webkit-focues-ring-color auto 5px;
+    }
+    .inputfile + label * {
+	    pointer-events: none;
+    }
+    .fileinput-label {
+        border-radius: 3px;
+    }
+
+    input[type=text]:focus:not([readonly]) {
+        border-bottom: 1px solid @color-primary-0;
+        box-shadow: 0 1px 0 0 @color-primary-0;
+    }
+    input[type=text]:focus:not([readonly]) + label {
+        color: @color-primary-0;
+    }
