@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store'
 import 'jquery'
-import axios from 'axios'
+// import axios from 'axios'
 
 import 'mdbootstrap/css/bootstrap.min.css'
 import 'mdbootstrap/css/mdb.min.css'
@@ -15,18 +15,18 @@ import './styles/consol.less'
 Vue.config.productionTip = false
 console.log('hello!')
 
-const resp = axios.get('http://localhost:9000/api/test', {
-  params: {
-    resDesc: 'wow'
-  }
-})
-.then(response => {
-  console.log(response.data)
-})
-.catch(e => {
-  console.log(e)
-})
-console.log(resp)
+// const resp = axios.get('http://localhost:9000/api/test', {
+//   params: {
+//     resDesc: 'wow'
+//   }
+// })
+// .then(response => {
+//   console.log(response.data)
+// })
+// .catch(e => {
+//   console.log(e)
+// })
+// console.log(resp)
 
 /* eslint-disable no-new */
 new Vue({

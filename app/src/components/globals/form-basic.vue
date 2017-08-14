@@ -25,24 +25,42 @@
                     <span>Your resume</span>
                 </label>
             </div>
+            <button type="button" class="btn btn-primary" @click="call()">Call</button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-  name: 'form-basic',
-  data () {
-    return {
-      location: '',
-      query: ''
+    name: 'form-basic',
+    computed: {
+        location: {
+            get () {
+                return this.$store.state.message
+            },
+            set (value) {
+                this.$store.commit('updateLocation', value)
+            }
+        },
+        query: {
+            get () {
+                return this.$store.state.message
+            },
+            set (value) {
+                this.$store.commit('updateQuery', value)
+            }
+        }
+    },
+    methods: {
+        call () {
+            this.$store.dispatch('match')
+        }
     }
-  }
 }
 </script>
 
 <style lang="less" scoped>
-    .form-head {
-        margin-bottom: 20px;
-    }
+.form-head {
+    margin-bottom: 20px;
+}
 </style>
