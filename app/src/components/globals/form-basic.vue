@@ -34,18 +34,19 @@
                 </v-container>
                 <v-card-text style="padding-bottom: 0px;">
                         <v-flex xs12>
-                            <v-text-field placeholder="City, state, or zip code" label="Location"></v-text-field>
+                            <v-text-field v-model="location" placeholder="City, state, or zip code" label="Location"></v-text-field>
                         </v-flex>
                         <v-flex xs12>
-                            <v-text-field placeholder="Job title, company, keyword" label="Query"></v-text-field>
+                            <v-text-field v-model="query" placeholder="Job title, company, keyword" label="Query"></v-text-field>
                         </v-flex>
                 </v-card-text>
                 <div>
-                <input ng-model="home.info.filename" type="file" id="file-1" class="inputfile inputfile-1">
-                    <label style="margin-bottom: 18px;" for="file-1" class="fileinput-label">
+                <input @change="uploadFile" type="file" id="file-1" class="inputfile inputfile-1">
+                     <label style="margin-bottom: 18px;" for="file-1" class="fileinput-label">
                         <i class="fa fa-upload" aria-hidden="true"></i>
-                        <span>Your resume</span>
-                    </label>
+                        <!-- <span>Your resume</span> -->
+                    </label> 
+                    <v-text-field for="file-1" class="fileinput-label" label="Resume"></v-text-field>
                 </div>
             </v-card>
 </template>
@@ -69,11 +70,22 @@ export default {
             set (value) {
                 this.$store.commit('updateQuery', value)
             }
+        },
+        resumeFile: {
+            get () {
+                return this.$store.state.resumeFile
+            },
+            set (value) {
+                this.$store.commit('updateResumeFile', value)
+            }
         }
     },
     methods: {
         call () {
             this.$store.dispatch('match')
+        },
+        uploadFile (e) {
+            this.$store.dispatch('upload', e)
         }
     }
 }

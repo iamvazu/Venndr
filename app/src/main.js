@@ -5,7 +5,6 @@ import Vuetify from 'vuetify'
 import App from './App'
 import router from './router'
 import store from './store'
-// import 'jquery'
 // import axios from 'axios'
 
 // import 'mdbootstrap/css/bootstrap.min.css'

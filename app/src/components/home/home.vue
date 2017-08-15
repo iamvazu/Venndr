@@ -24,7 +24,7 @@
     <div class="view">
         <v-container>
             <v-layout row wrap class="contain">
-                <v-flex lg6>
+                <v-flex md6>
                     <v-container>
                         <div class="left-info">
                             <div class="display-2 left-head">Jump start your career</div>
@@ -35,7 +35,7 @@
                         </div>
                     </v-container>
                 </v-flex>
-                <v-flex lg6>
+                <v-flex md6>
                     <v-container>
                         <formBasic></formBasic>
                     </v-container>
