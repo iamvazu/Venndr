@@ -35,7 +35,6 @@ module.exports = function (app, indexPath) {
             GithubJobs: function (callback) {
                 getJobs(secret.GithubJobs, resArr, callback);
             }
-
         }, function (err, results) {
             if (err) console.log(err);
             res.send(results);
