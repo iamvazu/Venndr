@@ -18,12 +18,6 @@ export default {
   computed: {
     showErrM () {
         if (!this.valid) return 'File must be PDF'
-    },
-    getName () {
-        console.log(this.resumeFile)
-        if (this.resumeFile) {
-            return this.resumeFile.name
-        }
     }
   },
   methods: {
@@ -32,7 +26,6 @@ export default {
           this.$refs.fileBtn.click()
       },
       storeF (e) {
-        console.log(e)
         const file = e.target.files[0] || e.dataTransfer.files[0]
         this.name = file.name
         if (file.type === 'application/pdf') {
