@@ -6,6 +6,7 @@
     "body-parser": "^1.4.3",
     "connect-busboy": "0.0.2",
     "express": "^4.5.1",
+    "keyword-extractor": "0.0.14",
     "method-override": "^2.0.2",
     "mongoose": "^4.4.20",
     "request": "^2.81.0"
