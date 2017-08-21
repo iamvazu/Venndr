@@ -55,7 +55,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 
 .left-head {
     color: #ffffff;

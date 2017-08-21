@@ -16,19 +16,24 @@
                         <v-flex xs12>
                             <uploadText></uploadText>                            
                         </v-flex>
+                        <v-flex xs12>
+
+                        </v-flex>
                 </v-card-text>
                 <div>
+                    <venndrBtn fn="submit" txt="Submit" ></venndrBtn>
                 </div>
             </v-card>
 </template>
 
 <script>
 import uploadText from '@/components/globals/upload-text'
-
+import venndrBtn from '@/components/globals/venndr-btn'
 export default {
     name: 'form-basic',
     components: {
-        uploadText
+        uploadText,
+        venndrBtn
     },
     computed: {
         location: {
@@ -47,19 +52,11 @@ export default {
                 this.$store.commit('updateQuery', value)
             }
         }
-    },
-    methods: {
-        call () {
-            this.$store.dispatch('match')
-        },
-        uploadFile (e) {
-            this.$store.dispatch('upload', e)
-        }
     }
 }
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .form-head {
     margin-bottom: 20px;
 }

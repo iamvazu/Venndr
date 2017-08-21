@@ -1,7 +1,7 @@
 <template>
     <div>
-        <v-text-field label="Resume" :error-messages="showErrM" :placeholder="name || 'Upload PDF'" @click="fire"></v-text-field>
-        <input type="file" ref="fileBtn" @change="storeF" class="inputfile">
+        <input type="file" ref="fileBtn" @focus="fire" @change="storeF" class="inputfile">        
+        <v-text-field ref="txt" label="Resume" :error-messages="showErrM" :placeholder="name || 'Upload PDF'" @click="fire"></v-text-field>
     </div>
 </template>
 
@@ -21,10 +21,12 @@ export default {
     }
   },
   methods: {
-      // points event to file btn
+      // fires click event to file btn
       fire () {
+          this.$refs.txt.focus();
           this.$refs.fileBtn.click()
       },
+      // stores file if valid
       storeF (e) {
         const file = e.target.files[0] || e.dataTransfer.files[0]
         this.name = file.name
@@ -39,7 +41,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style scoped>
     .inputfile {
         width: 0.1px;
         height: 0.1px;

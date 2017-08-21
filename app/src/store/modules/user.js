@@ -4,33 +4,37 @@ import * as types from '../mutation-types'
 
 // initial state
 const state = {
-    location: '',
-    query: '',
-    resumeFile: {},
-    resumeStr: '',
+    user: {
+        location: '',
+        query: '',
+        resumeFile: {},
+        resumeStr: '',
+    },
     matches: {},
     queue: []
 }
 
 const actions = {
-    match ({ commit, state }, product) {
-        this.matches = commit(types.GET_MATCHES)
+    submit({ commit, state }) {
+        console.log('submit called');
+        const { user } = state;
+
         console.log(this.location)
     }
 }
 
 const mutations = {
-    updateLocation (state, location) {
+    updateLocation(state, location) {
         state.location = location
     },
-    updateQuery (state, query) {
+    updateQuery(state, query) {
         state.query = query
     },
-    updateResumeFile (state, resumeFile) {
+    updateResumeFile(state, resumeFile) {
         state.resumeFile = resumeFile
         console.log(state.resumeFile)
     },
-    [types.GET_MATCHES] (state) {
+    [types.GET_MATCHES](state) {
         console.log('got here')
     }
 }
