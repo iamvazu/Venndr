@@ -6,18 +6,17 @@ const arrayify = require('../helpers/arrayify');
 // This function simply uses the request module to call a job api
 // url param is the url of the api
 // callback param is the callback in the async.parallel in the routes.js
-module.exports = async (url, resArr, callback) => {
+module.exports = (url, resArr, callback) => {
     // call api
     request({ url: url, forever: true }, function (err, response, body) {
 
         if (err) {
             console.log(err);
             callback(true);
-            return;
         }
         // do the keyword compare
-        let res = await match(resArr, JSON.parse(body));
-        return res;
+        let res = match(resArr, JSON.parse(body));
+        callback(false, res);
     });
 }
 
@@ -26,7 +25,7 @@ module.exports = async (url, resArr, callback) => {
 // of keyword matches there are.
 // then returns the same array with each object now containing a property
 // denoting the number of matches 
-function match(resArr, jobPostingsArr, callbackFunction) {
+function match(resArr, jobPostingsArr) {
 
     const compareKeywords = (curJob, callback) => {
         // first get the keywords of the curJob in an array

@@ -1,6 +1,7 @@
 // modules
 const express = require('express');
 const app = express();
+const fileUpload = require('express-fileupload');
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 //const mongoose = require('mongoose');
@@ -18,10 +19,10 @@ const port = process.env.PORT || 9000;
 // connect to the db
 //mongoose.connect(db.url);
 
-//parse body of all incoming requests 
-app.use(bodyParser.json());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb', type: 'application/vnd.api+json' }));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
+//app.use(fileUpload());
 app.use(busboy());
 app.use(methodOverride('X-HTTP-Method-Overrride'));
 

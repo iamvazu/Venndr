@@ -1,7 +1,7 @@
 <template>
     <div>
         <input type="file" ref="fileBtn" @focus="fire" @change="storeF" class="inputfile">        
-        <v-text-field ref="txt" label="Resume" :error-messages="showErrM" :placeholder="name || 'Upload PDF'" @click="fire"></v-text-field>
+        <v-text-field name="venndrFile" ref="txt" label="Resume" :error-messages="showErrM" :placeholder="name || 'Upload PDF'" @click="fire"></v-text-field>
     </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
         const file = e.target.files[0] || e.dataTransfer.files[0]
         this.name = file.name
         if (file.type === 'application/pdf') {
-            this.$store.commit('updateResumeFile', file)
+            this.$store.dispatch('upload', file)
             this.valid = true
         } else {
             this.valid = false
