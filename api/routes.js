@@ -43,7 +43,7 @@ module.exports = function (app, indexPath) {
             }
         }, (err, results) => {
             if (err) console.log(err);
-
+            console.log('starting search');
             match(results, (data) => {
                 res.send(data);
             });

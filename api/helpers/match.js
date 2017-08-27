@@ -1,5 +1,8 @@
 const async = require('async');
 
+// iterats thru every words in resume
+// checks if the current word is present
+// in the job description
 const search = (resArr, jobArr) => {
     let matches = 0;
     resArr.map(cur => {
@@ -8,20 +11,23 @@ const search = (resArr, jobArr) => {
     return matches;
 }
 
-const match = (stats, callback) => {
+const match = (stats, success, failure) => {
+    console.time('otherMatch');
     let { jobData } = stats;
     let { resArr } = stats;
 
-    async.each(jobData.GithubJobs.jobs,
-        (cur, cb) => {
-            let matches = search(resArr, cur.keywords);
-            cur.matches = matches;
+    async.each(jobData,
+        (curSite, cb) => {
+            let { jobs } = curSite;
+            jobs.map(cur => {
+                cur.matches = search(resArr, cur.keywords);
+            });
             cb();
-        }, (err) => {
-            if (err) console.log(err);
-
-            callback(stats);
-        })
+        },
+        (err) => {
+            if (err) failure(err);
+            console.timeEnd('otherMatch')
+            success(stats);
+        });
 }
-
 module.exports = match;
