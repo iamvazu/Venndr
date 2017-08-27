@@ -1,32 +1,12 @@
 const async = require('async');
-const busboy = require('connect-busboy');
-const fs = require('fs');
-const fileUpload = require('express-fileupload');
 const getJobs = require('./helpers/getjobs');
 const arrayify = require('./helpers/arrayify');
-
-const secret = require('./config/secret');
+const render = require('./helpers/render-pdf');
+const PDFJS = require('pdfjs-dist');
+const get = require('./helpers/get');
+const match = require('./helpers/match');
 
 module.exports = function (app, indexPath) {
-
-    // server routes ==========================================================================================================
-
-    app.post('/api/upload', function (req, res) {
-        console.log('upload request');
-        var fstream;
-        req.pipe(req.busboy);
-        req.busboy.on('file', function (fieldname, file, filename) {
-            console.log("Uploading: " + filename);
-
-            //Path where image will be uploaded
-            fstream = fs.createWriteStream(__dirname + '/resumes/' + filename);
-            file.pipe(fstream);
-            fstream.on('close', function () {
-                console.log("Upload Finished of " + filename);
-                //res.redirect('back');           //where to go next
-            });
-        });
-    });
 
     app.get('/api/test', function (req, res) {
         // get keyword array of the resume
@@ -43,8 +23,32 @@ module.exports = function (app, indexPath) {
             res.send(results);
         });
     });
-    // frontend routes ==========================================================================================================
 
+    app.post('/api/match', (req, res) => {
+        let { location } = req.body;
+        let { query } = req.body;
+        let { resume } = req.files;
+
+        async.parallel({
+            resArr: callback => {
+                render(resume.data, (str) => {
+                    str = arrayify(str);
+                    callback(null, str);
+                });
+            },
+            jobData: callback => {
+                get(location, query, (data) => {
+                    callback(null, data);
+                });
+            }
+        }, (err, results) => {
+            if (err) console.log(err);
+
+            match(results, (data) => {
+                res.send(data);
+            });
+        });
+    });
     // catch all route to send user to index
     app.get('*', function (req, res) {
         res.sendfile(indexPath); // loads the index.html file

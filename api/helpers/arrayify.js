@@ -4,15 +4,18 @@ const keyword = require('keyword-extractor');
 // like a resume or job description, and
 // uses a library to extract the keywords,
 // and return a sorted array of the keywords
-module.exports = (bigString) => {
-
-    // filter out stopwords 
-    return keyword.extract(bigString, {
+const arrayify = bigString => {
+    // get the keywords, remove elements that only have special characters
+    let keywords = keyword.extract(bigString, {
         language: "english",
         remove_digits: true,
         return_changed_case: true,
         remove_duplicates: false
-    }).sort();
+    }).filter(cur => cur.length > 1);
 
-    // return extract.sort();
+    // filter out stopwords 
+    return keywords.sort();
+
 }
+
+module.exports = arrayify;

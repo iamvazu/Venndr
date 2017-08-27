@@ -26,16 +26,16 @@ const actions = {
         console.log('upload called');
         // commit local file change, then upload to api
         commit('updateResumeFile', $file);
-        if (state.user.resumeFile != null) { // this should never be false
-            console.log($file);
-            axios.post('/api/upload', $file)
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        }
+        let fd = new FormData();
+        fd.append('resu', $file);
+
+        axios.post('/api/upload', fd)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
 }
 

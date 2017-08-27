@@ -7,6 +7,7 @@ const arrayify = require('../helpers/arrayify');
 // url param is the url of the api
 // callback param is the callback in the async.parallel in the routes.js
 module.exports = (url, resArr, callback) => {
+
     // call api
     request({ url: url, forever: true }, function (err, response, body) {
 
@@ -72,5 +73,13 @@ function search(resArr, jobArr) {
             }
         }
     }
+    return matches;
+}
+
+function otherMatch(resArr, jobArr) {
+    let matches = 0;
+    resArr.map(cur => {
+        if (jobArr.indexOf(cur) !== -1) matches++;
+    });
     return matches;
 }
