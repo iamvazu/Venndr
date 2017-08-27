@@ -10,7 +10,7 @@ const arrayify = bigString => {
         language: "english",
         remove_digits: true,
         return_changed_case: true,
-        remove_duplicates: false
+        remove_duplicates: true,
     }).filter(cur => cur.length > 1);
 
     // filter out stopwords 

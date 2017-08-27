@@ -17,29 +17,30 @@ const getLinks = (location, query) => {
 // accepts array of objects
 // returns array with keywords
 // tacked on as the 'arr' property
-const addKeys = resp => {
+const addKeywords = resp => {
     return resp.map(cur => cur.keywords = arrayify(cur.description));
 }
 
-const get = (location, query, callback) => {
+const get = (location, query, success, failure) => {
+    console.time('request');
     let jobData = getLinks(location, query);
 
     async.each(jobData,
         (cur, cb) => {
             request({ url: cur.link }, (err, resp, body) => {
-                if (err) console.log(err);
+                if (err) failure(err);
 
                 body = JSON.parse(body);
-                addKeys(body);
+                addKeywords(body);
 
                 // add the jobs property to the object
                 cur.jobs = body;
                 cb();
             });
         }, (err) => {
-            if (err) console.log(err);
-
-            callback(jobData);
+            if (err) failure(err);
+            console.timeEnd('request');
+            success(jobData);
         });
 }
 

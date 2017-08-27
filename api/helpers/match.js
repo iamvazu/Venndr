@@ -3,12 +3,16 @@ const async = require('async');
 // iterats thru every words in resume
 // checks if the current word is present
 // in the job description
+// accepts array of resume keywords and array of job keywords
+// returns array of matching words
 const search = (resArr, jobArr) => {
-    let matches = 0;
+    let commons = [];
     resArr.map(cur => {
-        if (jobArr.indexOf(cur) !== -1) matches++;
+        if (jobArr.indexOf(cur) !== -1) {
+            commons.push(cur);
+        }
     });
-    return matches;
+    return commons;
 }
 
 const match = (stats, success, failure) => {
@@ -20,7 +24,10 @@ const match = (stats, success, failure) => {
         (curSite, cb) => {
             let { jobs } = curSite;
             jobs.map(cur => {
-                cur.matches = search(resArr, cur.keywords);
+                // append matching keywords and number of keywords to job obj
+                cur.commons =  search(resArr, cur.keywords);
+                cur.matches = cur.commons.length;
+
             });
             cb();
         },

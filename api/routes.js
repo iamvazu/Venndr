@@ -1,10 +1,10 @@
 const async = require('async');
-const getJobs = require('./helpers/getjobs');
 const arrayify = require('./helpers/arrayify');
 const render = require('./helpers/render-pdf');
 const PDFJS = require('pdfjs-dist');
 const get = require('./helpers/get');
 const match = require('./helpers/match');
+const merge = require('./helpers/merge');
 
 module.exports = function (app, indexPath) {
 
@@ -28,7 +28,8 @@ module.exports = function (app, indexPath) {
         let { location } = req.body;
         let { query } = req.body;
         let { resume } = req.files;
-
+        console.time('match')
+        // asynchronously render pdf and query apis
         async.parallel({
             resArr: callback => {
                 render(resume.data, (str) => {
@@ -42,11 +43,21 @@ module.exports = function (app, indexPath) {
                 });
             }
         }, (err, results) => {
-            if (err) console.log(err);
-            console.log('starting search');
-            match(results, (data) => {
-                res.send(data);
-            });
+
+            if (err) res.send('Error while setting up compare');
+
+            match(results,
+                (data) => {
+                    // sort all the jobs in job data
+                    data.sorted = merge(data.jobData);
+                    delete data.jobData;
+                    console.timeEnd('match')
+                    res.send(data);
+
+                },
+                (err) => {
+                    res.send('Error while comparing jobs');
+                });
         });
     });
     // catch all route to send user to index

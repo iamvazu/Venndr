@@ -8,13 +8,13 @@ const PDFJS = require('pdfjs-dist');
 const chain = arr => {
     return arr.map(cur => cur.str).join('');
 }
-const render = (buffer, callback) => {
+const render = (buffer, success) => {
     PDFJS.getDocument(buffer).then(pdf => {
         pdf.getPage(1).then(page => {
             page.getTextContent().then(txt => {
                 let { items } = txt;
                 let concat = items.map(cur => cur.str).join('');
-                callback(concat);
+                success(concat);
             });
         });
     });
