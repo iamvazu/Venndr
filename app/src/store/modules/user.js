@@ -1,16 +1,16 @@
-import * as types from '../mutation-types'
+// import * as types from '../mutation-types'
 // import PDFJS from 'pdfjs-dist'
 import axios from 'axios'
-
+import router from '@/router/index'
 // initial state
 const state = {
     user: {
         location: '',
         query: '',
-        resumeFile: {},
-        resumeStr: ''
+        resumeFile: {}
     },
-    matches: {},
+    resArr: [],
+    sorted: [],
     queue: []
 }
 
@@ -19,23 +19,22 @@ const actions = {
         console.log('submit called');
         const { user } = state;
         console.log(user);
-        console.log(this.location)
-    },
-    // perform file upload
-    async upload({ commit, state }, $file) {
-        console.log('upload called');
-        // commit local file change, then upload to api
-        commit('updateResumeFile', $file);
-        let fd = new FormData();
-        fd.append('resu', $file);
 
-        axios.post('/api/upload', fd)
-            .then(res => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
+        let post = new FormData();
+        post.append('location', user.location);
+        post.append('query', user.query);
+        post.append('resume', user.resumeFile);
+
+        axios.post('http://localhost:9000/api/match', post)
+        .then(resp => {
+            console.log(resp);
+            state.resArr = resp.data.resArr;
+            state.sorted = resp.data.sorted;
+            router.push({name: 'match'});
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 }
 
@@ -48,9 +47,6 @@ const mutations = {
     },
     updateResumeFile(state, resumeFile) {
         state.user.resumeFile = resumeFile
-    },
-    [types.GET_MATCHES](state) {
-        console.log('got here')
     }
 }
 

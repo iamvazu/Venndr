@@ -1,28 +1,11 @@
 const async = require('async');
 const arrayify = require('./helpers/arrayify');
 const render = require('./helpers/render-pdf');
-const PDFJS = require('pdfjs-dist');
 const get = require('./helpers/get');
 const match = require('./helpers/match');
 const merge = require('./helpers/merge');
 
 module.exports = function (app, indexPath) {
-
-    app.get('/api/test', function (req, res) {
-        // get keyword array of the resume
-        let resArr = arrayify(req.query.resDesc);
-        console.log(req.query.resDesc);
-        // concurrently make a request to each api 
-        // TODO: Add more apis
-        async.parallel({
-            GithubJobs: function (callback) {
-                getJobs(secret.GithubJobs, resArr, callback);
-            }
-        }, function (err, results) {
-            if (err) console.log(err);
-            res.send(results);
-        });
-    });
 
     app.post('/api/match', (req, res) => {
         let { location } = req.body;

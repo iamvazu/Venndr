@@ -31,7 +31,7 @@ export default {
         const file = e.target.files[0] || e.dataTransfer.files[0]
         this.name = file.name
         if (file.type === 'application/pdf') {
-            this.$store.dispatch('upload', file)
+            this.$store.commit('updateResumeFile', file)
             this.valid = true
         } else {
             this.valid = false

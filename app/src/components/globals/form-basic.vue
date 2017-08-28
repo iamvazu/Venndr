@@ -1,29 +1,27 @@
 <template>
-            <v-card>
-                    <v-container>
-                    <span class="display-1"><i class="fa fa-search" aria-hidden="true"></i> Get Started</span>
-                    </v-container>
-                <v-container>
-                <hr style="background-color: #fff">
-                </v-container>
-                <v-card-text style="padding-bottom: 0px;">
-                        <v-flex xs12>
-                            <v-text-field v-model="location" placeholder="City, state, or zip code" label="Location"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12>
-                            <v-text-field v-model="query" placeholder="Job title, company, keyword" label="Query"></v-text-field>
-                        </v-flex>
-                        <v-flex xs12>
-                            <uploadText></uploadText>                            
-                        </v-flex>
-                        <v-flex xs12>
-
-                        </v-flex>
-                </v-card-text>
-                <div>
-                    <venndrBtn fn="submit" txt="Submit" ></venndrBtn>
-                </div>
-            </v-card>
+    <v-card>
+        <v-container>
+            <span class="display-1">
+                <i class="fa fa-search" aria-hidden="true"></i> Get Started</span>
+        </v-container>
+        <v-container>
+            <hr style="background-color: #fff">
+        </v-container>
+        <v-card-text style="padding-bottom: 0px;">
+            <v-flex xs12>
+                <v-text-field v-model="location" placeholder="City, state, or zip code" label="Location"></v-text-field>
+            </v-flex>
+            <v-flex xs12>
+                <v-text-field v-model="query" placeholder="Job title, company, keyword" label="Query"></v-text-field>
+            </v-flex>
+            <v-flex xs12>
+                <uploadText></uploadText>
+            </v-flex>
+        </v-card-text>
+        <div>
+            <venndrBtn @click="submit" txt="Submit"></venndrBtn>
+        </div>
+    </v-card>
 </template>
 
 <script>
@@ -37,20 +35,26 @@ export default {
     },
     computed: {
         location: {
-            get () {
+            get() {
                 return this.$store.state.message
             },
-            set (value) {
+            set(value) {
                 this.$store.commit('updateLocation', value)
             }
         },
         query: {
-            get () {
+            get() {
                 return this.$store.state.message
             },
-            set (value) {
+            set(value) {
                 this.$store.commit('updateQuery', value)
             }
+        }
+    },
+    methods: {
+        submit () {
+            this.$store.dispatch('submit');
+            
         }
     }
 }

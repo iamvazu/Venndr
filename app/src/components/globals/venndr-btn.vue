@@ -13,16 +13,6 @@ export default {
     name: 'venndr-btn',
     props: [
         'txt',
-        'fn'
-    ],
-    methods: {
-        fire () {
-            if (this.fn != null) {
-                this.$store.dispatch('submit');
-            } else {
-                throw new Error(`venndr-btn requires an action passed via the fn property`);
-            }
-        }
-    }
+    ]
 }
 </script>
