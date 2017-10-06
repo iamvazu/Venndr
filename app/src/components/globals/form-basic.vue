@@ -19,19 +19,19 @@
             </v-flex>
         </v-card-text>
         <div>
-            <venndrBtn @click="submit" txt="Submit"></venndrBtn>
+            <v-btn large success @click="submit">Submit</v-btn>
         </div>
     </v-card>
 </template>
 
 <script>
 import uploadText from '@/components/globals/upload-text'
-import venndrBtn from '@/components/globals/venndr-btn'
+// import venndrBtn from '@/components/globals/venndr-btn'
 export default {
     name: 'form-basic',
     components: {
-        uploadText,
-        venndrBtn
+        uploadText
+       // venndrBtn
     },
     computed: {
         location: {
@@ -54,7 +54,6 @@ export default {
     methods: {
         submit () {
             this.$store.dispatch('submit');
-            
         }
     }
 }

@@ -1,5 +1,4 @@
 // import * as types from '../mutation-types'
-// import PDFJS from 'pdfjs-dist'
 import axios from 'axios'
 import router from '@/router/index'
 // initial state
@@ -30,7 +29,7 @@ const actions = {
             console.log(resp);
             state.resArr = resp.data.resArr;
             state.sorted = resp.data.sorted;
-            router.push({name: 'match'});
+            router.push('match');
         })
         .catch(err => {
             console.log(err);

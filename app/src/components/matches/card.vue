@@ -1,10 +1,12 @@
 <template>
-  
+  <v-container>
+    hey
+  </v-container>
 </template>
 
 <script>
 export default {
-  name: 'card'
+  name: 'jobCard'
 }
 </script>
 

@@ -8,7 +8,7 @@
             </v-flex>
             <v-flex lg6>
                 <v-container class="job-view">
-
+                    <jobCard></jobCard>
                 </v-container>
             </v-flex>
         </v-layout>
@@ -16,11 +16,11 @@
 </template>
 
 <script>
-import card from '@/components/matches/card';
+import jobCard from '@/components/matches/card';
 
 export default {
     name: 'matches',
-    components: card
+    component: jobCard
 }
 </script>
 

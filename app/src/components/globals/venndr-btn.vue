@@ -4,7 +4,7 @@ fn: string containing the name of a vuex 'action' to call
 
 <template>
     <div>
-        <v-btn large success @click="fire">{{txt}}</v-btn>
+        <v-btn large success>{{txt}}</v-btn>
     </div>
 </template>
 
@@ -12,7 +12,7 @@ fn: string containing the name of a vuex 'action' to call
 export default {
     name: 'venndr-btn',
     props: [
-        'txt',
+        'txt'
     ]
 }
 </script>

@@ -21,14 +21,10 @@ const match = (stats, success, failure) => {
     let { resArr } = stats;
 
     async.each(jobData,
-        (curSite, cb) => {
-            let { jobs } = curSite;
-            jobs.map(cur => {
-                // append matching keywords and number of keywords to job obj
-                cur.commons =  search(resArr, cur.keywords);
-                cur.matches = cur.commons.length;
-
-            });
+        (cur, cb) => {
+            //let { jobs } = curSite;
+            cur.commons = search(resArr, cur.keywords);
+            cur.matches = cur.commons.length;
             cb();
         },
         (err) => {
