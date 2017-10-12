@@ -12,7 +12,6 @@ const env = process.env.NODE_ENV;
 // get the db url
 //const db = require('./config/db');
 
-// get port
 const port = process.env.PORT || 9000;
 
 // connect to the db
@@ -34,4 +33,6 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}!`); 
 });
 
+const db = require("./api/db/db.js");
+db();
 exports = module.exports = app;

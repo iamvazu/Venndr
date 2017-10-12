@@ -35,7 +35,6 @@ module.exports = function (app, indexPath) {
                 data => {
 
                     // build the final response object
-
                     data.resume = {
                         keywords: data.resArr,
                         words: data.resArr.length
@@ -72,7 +71,6 @@ module.exports = function (app, indexPath) {
                 });
             }
         }, (err, results) => {
-
             if (err) res.send('lol wtf');
             let resp = new JobSeeker(results.resArr, results.jobData);
             resp.matchJobs();

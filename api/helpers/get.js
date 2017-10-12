@@ -4,6 +4,7 @@ const arrayify = require('./arrayify');
 const async = require('async');
 const config = require('../config/secret.js');
 
+
 class Job {
     constructor(jobsite, initial) {
         this.site = jobsite;
@@ -49,8 +50,8 @@ class Job {
             company: this.initial.company.name,
             title: this.initial.title,
             description: this.initial.description,
-            location: this.initial.company.location,
-            how_to_apply: this.initial.howto_apply,
+            location: this.initial.location.name || "",
+            how_to_apply: this.initial.how_to_apply,
             url: this.initial.apply_url,
             company_url: this.initial.company.url,
             date: "",
@@ -116,11 +117,12 @@ const getLinks = (location, query) => {
 }
 
 // accepts array of objects
-// returns array with keywords
-// tacked on as the 'arr' property
+// returns same array with keywords
+// tacked on as the 'keywords' property
 const addKeywords = resp => {
     return resp.map(cur => cur.keywords = arrayify(cur.description));
 }
+
 
 const get = (location, query, success, failure) => {
     console.time('request');
