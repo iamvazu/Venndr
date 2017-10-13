@@ -36,7 +36,7 @@ class Job {
             location: this.initial.location,
             how_to_apply: this.initial.how_to_apply,
             url: this.initial.url,
-            company_url: this.initial.company_url,
+            compasny_url: this.initial.company_url,
             date: this.initial.created_at,
             type: this.initial.type,
             keywords: arrayify(this.initial.description)
@@ -44,13 +44,22 @@ class Job {
     }
 
     formAuthenticJobs() {
-
+        // Authentic Jobs api returns an annoying objects
+        // instead of a string
+        // this checks if the name property is present and if it is,
+        // set location to that value, else wise set it to empty string
+        let loc;
+        if (this.initial.location && this.initial.location.name) {
+            loc = this.initial.location.name;
+        } else {
+            loc = "";
+        }
         return {
             api: "AuthenticJobs",
             company: this.initial.company.name,
             title: this.initial.title,
             description: this.initial.description,
-            location: this.initial.location.name || "",
+            location: loc,
             how_to_apply: this.initial.how_to_apply,
             url: this.initial.apply_url,
             company_url: this.initial.company.url,

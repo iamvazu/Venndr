@@ -2,7 +2,7 @@ const async = require('async');
 const arrayify = require('./arrayify');
 
 class JobSeeker {
-    
+
     constructor(resume, jobs) {
         // A JobSeeker object is sent as the api response
         // it contains two properties: resume and jobs
@@ -20,7 +20,6 @@ class JobSeeker {
      * Compares job keywords with user keywords
      */
     matchJobs() {
-
         // iterate over job keywords, check for keyword in current job
         const search = (curJobKeywords) => {
             let commons = [];
@@ -32,47 +31,32 @@ class JobSeeker {
             return commons;
         }
 
-        const match = () => {
-            console.time('otherMatch');
+        console.time('otherMatch');
 
-            async.each(this.jobs,
-                (cur, cb) => {
-                    //let { jobs } = curSite;
-                    cur.commons = search(cur.keywords);
-                    cur.matches = cur.commons.length;
-                    cb();
-                },
-                (err) => {
-                    if (err) console.log("heck");
-                    console.timeEnd('otherMatch')
-                });
-        }
+        // iterate over array of job objects
+        async.each(this.jobs, (cur, cb) => {
+            cur.commons = search(cur.keywords);
+            cur.matches = cur.commons.length;
+            cb();
+        }, (err) => {
+            if (err) console.log("heck");
+            console.timeEnd('otherMatch')
+        });
 
-        match();
     }
     /**
      * Sorts the jobs arrray by keyword matches
      */
     sortJobsBy(prop) {
-        // passed in the array.sort call below
-        // sorts highest matches to lowest
-        const compare = (a, b) => {
-            return b[prop] - a[prop];
-        }
-
         // sort this.jobs
-        const sort = () => {
-            console.time('sort');
+        console.time('sort');
 
-            // sort by keyword matches and return
-            this.jobs.sort(compare);
-            console.timeEnd('sort')
-        }
-
-        sort();
+        // sort by keyword matches and return
+        this.jobs.sort((a, b) => {
+            return b[prop] - a[prop];
+        });
+        console.timeEnd('sort')
     }
-
-
 }
 
 module.exports = JobSeeker;

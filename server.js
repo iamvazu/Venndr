@@ -33,6 +33,6 @@ app.listen(port, () => {
     console.log(`Listening on port ${port}!`); 
 });
 
-const db = require("./api/db/db.js");
-db();
+// const db = require("./api/db/db.js");
+// db();
 exports = module.exports = app;

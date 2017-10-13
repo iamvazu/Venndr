@@ -5,6 +5,7 @@ const get = require('./helpers/get');
 const match = require('./helpers/match');
 const sort = require('./helpers/sort');
 const JobSeeker = require('./helpers/JobSeeker');
+const Job = require('./db/Job');
 
 module.exports = function (app, indexPath) {
 
@@ -79,6 +80,34 @@ module.exports = function (app, indexPath) {
         });
     });
 
+    app.post('/api/db', (req, res) => {
+        let { location } = req.body;
+        let { query } = req.body;
+        let { resume } = req.files;
+        console.time('match')
+
+        // render pdf and get jobs
+        async.parallel({
+            resArr: callback => {
+                render(resume.data, str => {
+                    callback(null, str);
+                });
+            },
+            jobData: callback => {
+                Job.find({keywords: query}, (err, jobs) => {
+                    callback(null, jobs);
+                });
+            }
+        }, (err, results) => {
+            if (err) res.send('lol wtf');
+
+            let responseObj = new JobSeeker(results.resArr, results.jobData);
+            responseObj.matchJobs();
+            responseObj.sortJobsBy('matches');
+            res.send(responseObj);
+        });
+    });
+    
     app.get('*', function (req, res) {
         res.sendfile(indexPath); // loads the index.html file
         console.log('index.html sent');

@@ -1,28 +1,23 @@
 const config = require("../config/db.js");
 const get = require("../helpers/get.js");
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Job = require('./Job');
 
-const jobSchema = new Schema({
-    api: String,
-    company: String,
-    title: String,
-    description: String,
-    locaton: String,
-    how_to_apply: String,
-    url: String,
-    company_url: String,
-    date: String,
-    type: String,
-    keywords: Array
-});
-const Job = mongoose.model('Job', jobSchema);
 const fill = () => {
-    mongoose.connect(config.url);
+    get('', '', data => {
+        Job.remove({}, err => {
+            if (err) throw err;
+            for (let i = 0; i < data.length; i++) {
+                let scheme = new Job(data[i]);
 
-    get('','',(data) => {
-        console.log('wat');
+                scheme.save(err => {
+                    if (err) throw err;
+
+                    console.log('wat');
+                });
+            }
+        });
     });
 }
+
 
 module.exports = fill;
