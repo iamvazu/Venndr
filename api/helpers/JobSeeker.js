@@ -15,7 +15,10 @@ class JobSeeker {
 
         // array of job objects
         this.jobs = jobs;
+
+        this.matchJobs();
     }
+
     /**
      * Compares job keywords with user keywords
      */
@@ -57,6 +60,7 @@ class JobSeeker {
         });
         console.timeEnd('sort')
     }
+
 }
 
 module.exports = JobSeeker;

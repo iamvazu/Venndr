@@ -1,116 +1,44 @@
 const async = require('async');
-const arrayify = require('./helpers/arrayify');
-const render = require('./helpers/render-pdf');
-const get = require('./helpers/get');
-const match = require('./helpers/match');
-const sort = require('./helpers/sort');
+const renderPDF = require('./helpers/render-pdf');
 const JobSeeker = require('./helpers/JobSeeker');
 const Job = require('./db/Job');
 
-module.exports = function (app, indexPath) {
+module.exports = (app, indexPath) => {
 
+    /**
+     * asynchronously renders the users resume
+     * and queries the db for jobs
+     * and compares them
+     */
     app.post('/api/match', (req, res) => {
         let { location } = req.body;
         let { query } = req.body;
         let { resume } = req.files;
-        console.time('match')
-
+        
         // render pdf and get jobs
         async.parallel({
             resArr: callback => {
-                render(resume.data, (str) => {
-                    str = arrayify(str);
+                renderPDF(resume.data, str => {
                     callback(null, str);
                 });
             },
             jobData: callback => {
-                get(location, query, (data) => {
-                    callback(null, data);
-                });
-            }
-        }, (err, results) => {
-
-            if (err) res.send('lol wtf');
-
-            match(results,
-                data => {
-
-                    // build the final response object
-                    data.resume = {
-                        keywords: data.resArr,
-                        words: data.resArr.length
-                    }
-                    // sort all the jobs in job data
-                    data.sorted = sort(data.jobData);
-                    delete data.jobData;
-                    console.timeEnd('match')
-                    res.send(data);
-
-                },
-                err => {
-                    res.send('Error while comparing jobs');
-                });
-        });
-    });
-
-    app.post('/api/test', (req, res) => {
-        let { location } = req.body;
-        let { query } = req.body;
-        let { resume } = req.files;
-        console.time('match')
-
-        // render pdf and get jobs
-        async.parallel({
-            resArr: callback => {
-                render(resume.data, (str) => {
-                    callback(null, str);
-                });
-            },
-            jobData: callback => {
-                get(location, query, (data) => {
-                    callback(null, data);
-                });
-            }
-        }, (err, results) => {
-            if (err) res.send('lol wtf');
-            let resp = new JobSeeker(results.resArr, results.jobData);
-            resp.matchJobs();
-            resp.sortJobsBy('matches');
-            res.send(resp);
-        });
-    });
-
-    app.post('/api/db', (req, res) => {
-        let { location } = req.body;
-        let { query } = req.body;
-        let { resume } = req.files;
-        console.time('match')
-
-        // render pdf and get jobs
-        async.parallel({
-            resArr: callback => {
-                render(resume.data, str => {
-                    callback(null, str);
-                });
-            },
-            jobData: callback => {
-                Job.find({keywords: query}, (err, jobs) => {
+                Job.find({ keywords: query }, (err, jobs) => {
+                    // extract the "_doc" property out of the array
+                    jobs = jobs.map(cur => cur._doc);
                     callback(null, jobs);
                 });
             }
         }, (err, results) => {
             if (err) res.send('lol wtf');
 
-            let responseObj = new JobSeeker(results.resArr, results.jobData);
-            responseObj.matchJobs();
+            let responseObj = new JobSeeker(results.resArr, results.jobData, res);
             responseObj.sortJobsBy('matches');
             res.send(responseObj);
         });
     });
-    
-    app.get('*', function (req, res) {
-        res.sendfile(indexPath); // loads the index.html file
-        console.log('index.html sent');
-    });
 
+    app.get('*', function (req, res) {
+        res.sendfile(indexPath);
+    });
 };
