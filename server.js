@@ -13,7 +13,7 @@ const db = process.env.DB_URL || require('./api/config/db');
 const port = process.env.PORT || 9000;
 
 // connect to the db
-mongoose.createConnection(db.url);
+mongoose.createConnection(db);
 
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(busboyBodyParser());
