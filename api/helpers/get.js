@@ -108,23 +108,6 @@ class JobSite {
     }
 }
 
-
-// this function accepts a location and query string
-// it returns and array of links to call all of the job
-// apis
-const getLinks = (location, query) => {
-    return {
-        GithubJobs: {
-            name: "GithubJobs",
-            link: `https://jobs.github.com/positions.json?description=${query}&location=${location}`
-        },
-        AuthenticJobs: {
-            name: "AuthenticJobs",
-            link: `https://authenticjobs.com/api/?api_key=${config.AuthenticJobs}&method=aj.jobs.search&format=json&keywords=${query}&location=${location}`
-        }
-    }
-}
-
 // accepts array of objects
 // returns same array with keywords
 // tacked on as the 'keywords' property
@@ -135,7 +118,16 @@ const addKeywords = resp => {
 
 const get = (location, query, success, failure) => {
     console.time('request');
-    let jobData = getLinks(location, query);
+    let jobData = {
+        GithubJobs: {
+            name: "GithubJobs",
+            link: `https://jobs.github.com/positions.json?description=${query}&location=${location}`
+        },
+        AuthenticJobs: {
+            name: "AuthenticJobs",
+            link: `https://authenticjobs.com/api/?api_key=${process.env.AuthenticJobs || config.AuthenticJobs}&method=aj.jobs.search&format=json&keywords=${query}&location=${location}`
+        }
+    }
 
     // this array contains all the jobs
     // from all the apis

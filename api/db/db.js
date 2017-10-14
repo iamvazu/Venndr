@@ -1,4 +1,3 @@
-const config = require("../config/db.js");
 const getJobs = require("../helpers/get.js");
 const Job = require('./Job');
 

@@ -34,8 +34,6 @@ class JobSeeker {
             return commons;
         }
 
-        console.time('otherMatch');
-
         // iterate over array of job objects
         async.each(this.jobs, (cur, cb) => {
             cur.commons = search(cur.keywords);
@@ -43,7 +41,6 @@ class JobSeeker {
             cb();
         }, (err) => {
             if (err) console.log("heck");
-            console.timeEnd('otherMatch')
         });
 
     }
@@ -51,14 +48,10 @@ class JobSeeker {
      * Sorts the jobs arrray by keyword matches
      */
     sortJobsBy(prop) {
-        // sort this.jobs
-        console.time('sort');
-
         // sort by keyword matches and return
         this.jobs.sort((a, b) => {
             return b[prop] - a[prop];
         });
-        console.timeEnd('sort')
     }
 
 }
