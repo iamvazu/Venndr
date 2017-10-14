@@ -13,7 +13,7 @@ module.exports = (app, indexPath) => {
     app.post('/api/match', (req, res) => {
         let { location } = req.body;
         let { query } = req.body;
-        let { resume } = req.files;
+        let { resume } = req.files || req.body;
         
         // render pdf and get jobs
         async.parallel({
