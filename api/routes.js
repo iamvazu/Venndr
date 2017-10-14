@@ -39,6 +39,6 @@ module.exports = (app, indexPath) => {
     });
 
     app.get('*', function (req, res) {
-        res.sendfile(indexPath);
+        res.sendfile('../app/dist/index.html');
     });
 };

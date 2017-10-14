@@ -6,8 +6,6 @@ const methodOverride = require('method-override');
 const mongoose = require('mongoose');
 const busboyBodyParser = require('busboy-body-parser');
 
-const env = process.env.NODE_ENV;
-
 const db = process.env.DB_URL || require('./api/config/db');
 
 const port = process.env.PORT || 9000;
