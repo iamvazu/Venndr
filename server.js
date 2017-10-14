@@ -19,9 +19,9 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(busboyBodyParser());
 app.use(methodOverride('X-HTTP-Method-Overrride'));
 
-app.use(express.static(`${__dirname}/app/dist`));
+app.use(express.static(`./app/dist`));
 
-const indexPath = `${__dirname}/app/dist/index.html`;
+const indexPath = `./app/dist/index.html`;
 require('./api/routes')(app, indexPath);
 
 app.listen(port, () => {
