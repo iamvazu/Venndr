@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const config = require('../config/db');
+const db = process.env.DB_URL || require('../config/db');
 
-mongoose.connect(config.url);
+mongoose.connect(db);
 
 const jobSchema = new Schema({
     api: String,
