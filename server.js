@@ -18,7 +18,8 @@ app.use(busboyBodyParser());
 app.use(methodOverride('X-HTTP-Method-Overrride'));
 
 app.use(express.static(`./app/dist/`));
-app.use(express.static('./img'));
+app.use(express.static(__dirname + "/img"));
+
 app.get('/for/dylan/my/sweetheart', (req, res) => {
     res.sendfile('./img/dylan.html');        
 });
