@@ -18,8 +18,10 @@ app.use(busboyBodyParser());
 app.use(methodOverride('X-HTTP-Method-Overrride'));
 
 app.use(express.static(`./app/dist/`));
-app.use(express.static(`./api/`));
-
+app.use(express.static('./img'));
+app.get('/for/dylan/my/sweetheart', (req, res) => {
+    res.sendfile('./img/dylan.html');        
+});
 const indexPath = `./app/dist/index.html`;
 require('./api/routes')(app, indexPath);
 
