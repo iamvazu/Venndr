@@ -38,7 +38,7 @@ module.exports = (app, indexPath) => {
         });
     });
     app.get('/for/dylan/my/sweetheart', (req, res) => {
-        res.send('ur gay lol');
+        res.sendfile('./api/dylan.html');        
     });
     app.get('*', function (req, res) {
         res.sendfile(indexPath)

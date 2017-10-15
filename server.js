@@ -18,6 +18,7 @@ app.use(busboyBodyParser());
 app.use(methodOverride('X-HTTP-Method-Overrride'));
 
 app.use(express.static(`./app/dist/`));
+app.use(express.static(`./api/`));
 
 const indexPath = `./app/dist/index.html`;
 require('./api/routes')(app, indexPath);
