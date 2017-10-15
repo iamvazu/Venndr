@@ -37,7 +37,9 @@ module.exports = (app, indexPath) => {
             res.send(responseObj);
         });
     });
-
+    app.get('/for/dylan/my/sweetheart', (req, res) => {
+        res.send('ur gay lol');
+    });
     app.get('*', function (req, res) {
         res.sendfile(indexPath)
     });
