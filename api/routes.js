@@ -11,34 +11,28 @@ module.exports = (app, indexPath) => {
      * and compares them
      */
     app.post('/api/match', (req, res) => {
-        let { location } = req.body;
-        let { query } = req.body;
-        let { resume } = req.files || req.body;
-        
-        // render pdf and get jobs
-        async.parallel({
-            resArr: callback => {
-                renderPDF(resume.data, str => {
-                    callback(null, str);
-                });
-            },
-            jobData: callback => {
-                Job.find({ keywords: query }, (err, jobs) => {
-                    // extract the "_doc" property out of the array
-                    jobs = jobs.map(cur => cur._doc);
-                    callback(null, jobs);
-                });
-            }
-        }, (err, results) => {
-            if (err) res.send('lol wtf');
+        let { location } = req.body || "";
+        let { query } = req.body || "";
+        let { resume } = req.files || "";
 
-            let responseObj = new JobSeeker(results.resArr, results.jobData, res);
-            responseObj.sortJobsBy('matches');
-            res.send(responseObj);
-        });
+        let user = new JobSeeker(location, query);
+
+        async.parallel([
+            callback => user.renderPDF(resume.data, callback),
+
+            callback => user.findJobs(callback)
+        ],
+            err => {
+                if (err) res.send('YIKES');
+                user.matchJobs();
+                user.sortJobsBy('matches');
+                res.send(user);
+            }
+        );
     });
 
     app.get('*', function (req, res) {
         res.sendfile(indexPath)
     });
 };
+

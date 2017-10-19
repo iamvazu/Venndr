@@ -1,3 +1,6 @@
+/**
+ * Job schema for db
+ */
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const db = process.env.DB_URL || require('../config/db');
