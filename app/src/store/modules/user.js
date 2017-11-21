@@ -8,8 +8,8 @@ const state = {
         query: '',
         resumeFile: {}
     },
-    resArr: [],
-    sorted: [],
+    resume: [],
+    jobs: [],
     queue: []
 }
 
@@ -17,7 +17,7 @@ const actions = {
     submit({ commit, state }) {
         console.log('submit called');
         const { user } = state;
-        console.log(user);
+        // console.log(user);
 
         let post = new FormData();
         post.append('location', user.location);
@@ -26,9 +26,9 @@ const actions = {
 
         axios.post('http://localhost:9000/api/match', post)
         .then(resp => {
-            console.log(resp);
-            state.resArr = resp.data.resArr;
-            state.sorted = resp.data.sorted;
+            // console.log(resp);
+            state.resume = resp.data.resume;
+            state.jobs = resp.data.jobs;
             router.push('match');
         })
         .catch(err => {

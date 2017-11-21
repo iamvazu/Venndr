@@ -1,7 +1,7 @@
 const async = require('async');
-const renderPDF = require('./helpers/render-pdf');
 const JobSeeker = require('./helpers/JobSeeker');
 const Job = require('./db/Job');
+const queryJobs = require('./db/query.js');
 
 module.exports = (app, indexPath) => {
 
@@ -16,19 +16,24 @@ module.exports = (app, indexPath) => {
         let { resume } = req.files || "";
 
         let user = new JobSeeker(location, query);
-
         async.parallel([
             callback => user.renderPDF(resume.data, callback),
 
-            callback => user.findJobs(callback)
-        ],
-            err => {
-                if (err) res.send('YIKES');
-                user.matchJobs();
-                user.sortJobsBy('matches');
-                res.send(user);
-            }
-        );
+            callback => queryJobs(query, location, jobs => {
+                // check if any jobs were found in the query, if not, end the request
+                if (jobs) {
+                    callback(null, jobs);
+                }
+                res.end('No Jobs found :(');
+            })
+        ], (err, results) => {
+            if (err) res.send(err);
+
+            console.log('');
+            user.matchJobs(results[1]);
+            user.sortJobsBy('matches');
+            res.send(user);
+        });
     });
 
     app.get('*', function (req, res) {

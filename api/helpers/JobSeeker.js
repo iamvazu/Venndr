@@ -5,21 +5,6 @@ const Job = require('../db/Job');
 
 class JobSeeker {
 
-    // constructor(resume, jobs) {
-    //     // A JobSeeker object is sent as the api response
-    //     // it contains two properties: resume and jobs
-    //     this.resume = {};
-    //     this.jobs = [];
-
-    //     // resume prop contains the resume str, and keywords
-    //     this.resume.text = resume;
-    //     this.resume.keywords = arrayify(resume);
-
-    //     // array of job objects
-    //     this.jobs = jobs;
-
-    //     this.matchJobs();
-    // }
     constructor(location, query) {
         this.location = location;
         this.query = query;
@@ -34,10 +19,11 @@ class JobSeeker {
 
     /**
      * Compares job keywords with user keywords
+     * appends a 'commons' and 'matches' property to the Job object
      */
-    matchJobs() {
+    matchJobs(jobArray) {
         // iterate over job keywords, check for keyword in current job
-        const search = (curJobKeywords) => {
+        const search = curJobKeywords => {
             let commons = [];
             this.resume.keywords.map(cur => {
                 if (curJobKeywords.indexOf(cur) !== -1) {
@@ -48,17 +34,22 @@ class JobSeeker {
         }
 
         // iterate over array of job objects
-        async.each(this.jobs, (cur, cb) => {
+        async.each(jobArray, (cur, cb) => {
             cur.commons = search(cur.keywords);
             cur.matches = cur.commons.length;
             cb();
         }, (err) => {
-            if (err) console.log("heck");
+            if (err) console.log("wtf");
+            this.jobs = jobArray;
         });
 
     }
     /**
      * Sorts the jobs arrray by keyword matches
+     * 
+     * prop - string containing property name of the Job object
+     * 
+     * ex - sortJobsBy('matches'); will sort the jobs by values in the matches property
      */
     sortJobsBy(prop) {
         // sort by keyword matches and return
@@ -67,7 +58,14 @@ class JobSeeker {
         });
     }
 
-    renderPDF(buffer, success) {
+    /**
+     * takes raw pdf string and uses PDFJS to parse the text
+     * 
+     * buffer - raw pdf string from user
+     * success - on success callback function
+     * yikes - error callback function
+     */
+    renderPDF(buffer, success, yikes) {
         // get the text
         // pdfjs getTextContent() returns an
         // array of objects which contains a
@@ -83,15 +81,8 @@ class JobSeeker {
                     success();
                 });
             });
-        });
-    }
-
-    findJobs(success) {
-        Job.find({ keywords: this.query }, (err, jobs) => {
-            // extract the "_doc" property out of the array
-            jobs = jobs.map(cur => cur._doc);
-            this.jobs = jobs;
-            success();
+        }).catch(err => {
+            yikes(err);
         });
     }
 }
