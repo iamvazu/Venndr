@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "browser-sync start --server --files \"index.html\" \"css/*.css\" \"js/*.js\""
+
   },
   "author": "",
   "license": "ISC"
