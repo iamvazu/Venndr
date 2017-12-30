@@ -15,10 +15,10 @@ const port = process.env.PORT || 9000;
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(busboyBodyParser());
 app.use(methodOverride('X-HTTP-Method-Overrride'));
-app.use(express.static(`./app/dist/`));
 app.use(cors());
+app.use(express.static(`app`));
 
-const indexPath = `./app/dist/index.html`;
+const indexPath = `./app/index.html`;
 require('./api/routes')(app, indexPath);
 
 app.listen(port, () => {

@@ -1,5 +1,48 @@
 $(document).ready(() => {
+
+    // stores the array of jobs returned 
+    // from the api
+    let API = {};
     
+    // return a string of html formatted
+    // with the current iteration in the job
+    // array
+    const format = index => {
+        let cur = API.jobs[index];
+        
+        let html =
+        `
+        <div class="row card">
+            <h4>${cur.company}</h4>
+            <p>${cur.title} - <light>${cur.location}</light></p>
+
+            <p><strong>${cur.matches}</strong> matching keywords</p>
+            <br>
+            <button class="button-primary">Apply</button>
+            <button class="button">Learn More</button>            
+        </div>
+        `;
+
+        return html;
+    };
+    
+    // iterates over job array and builds
+    // large html string of all the jobs
+    const showJobs = () => {
+    
+        if (!API) {
+            console.log("Empty array");
+            return;
+        }
+        let innerHTML = "";
+        console.log(API.jobs);
+        $.each(API.jobs, (index, value) => {
+            let newItem = format(index);
+            innerHTML += newItem;
+        });
+
+        $('#matches').html(innerHTML);
+    }
     // form submit
     //TODO: change to .submit
     $('form').submit(event => {
@@ -21,6 +64,11 @@ $(document).ready(() => {
         })
         .done(data => {
             console.log(data);
+
+            // set the global array
+            API = data;
+
+            showJobs();
         });
     });
 
@@ -47,7 +95,6 @@ $(document).ready(() => {
     $file.on('change', e => {
 
         let file = e.target.files[0];
-        console.log(file);
 
         if (file && file.type === "application/pdf") {
             $filetext.val(e.target.files[0].name);            
