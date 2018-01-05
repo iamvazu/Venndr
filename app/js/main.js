@@ -17,12 +17,13 @@ $(document).ready(() => {
             <p>${cur.title} - <light>${cur.location}</light></p>
 
             <p><strong>${cur.matches}</strong> matching keywords</p>
+
             <br>
-            <button class="button-primary">Apply</button>
-            <button class="button">Learn More</button>            
+            <button class="button-primary" style="margin-top: 1.5rem">Apply</button>
+            <a target="_blank" href="/jobs/info.html?${$.param({id: cur._id, matches: cur.matches, commons: cur.commons.join(',')})}" class="button" id="learn" >Learn More</a>            
         </div>
         `;
-
+        
         return html;
     };
     
@@ -35,7 +36,7 @@ $(document).ready(() => {
             return;
         }
         let innerHTML = "";
-        console.log(API.jobs);
+        // console.log(API.jobs);
         $.each(API.jobs, (index, value) => {
             let newItem = format(index);
             innerHTML += newItem;
@@ -43,6 +44,17 @@ $(document).ready(() => {
 
         $('#matches').html(innerHTML);
     }
+
+    const bakeCookies = () => {
+        Cookies.set('location', API.location);
+        Cookies.set('query', API.query);
+        
+        Cookies.set('resume_text', API.resume.text);
+        Cookies.set('resume_keywords', API.resume.keywords);
+
+        console.log(Cookies.get());
+    }
+
     // form submit
     //TODO: change to .submit
     $('form').submit(event => {
@@ -69,9 +81,11 @@ $(document).ready(() => {
             API = data;
 
             showJobs();
+
+            // store metadata in cookies
+            bakeCookies();
         });
     });
-
 
     // FILE BUTTONS
     let $filetext = $('#filetext');

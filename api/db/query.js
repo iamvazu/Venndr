@@ -1,5 +1,5 @@
 const Job = require('./Job.js');
-
+const ObjectId = require('mongoose').Types.ObjectId;
 /**
  * Queries the db for jobs, sending the 'query' param as an argument
  * then sets the db res to this.jobs
@@ -15,4 +15,16 @@ const queryJobs = (query, location, success) => {
     });
 }
 
-module.exports = queryJobs;
+const queryById = (id, callback) => {
+    Job.find({"_id": ObjectId(id)}, (err, job) => {
+
+        if (err) callback(err, null);
+
+        callback(null, job[0]._doc);
+    });
+}
+
+module.exports = {
+    queryJobs: queryJobs,
+    queryById: queryById
+};

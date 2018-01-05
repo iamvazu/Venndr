@@ -17,6 +17,10 @@
 .card h4, .card p {
     margin-bottom: 0;
 }
+.card .snip {
+    font-weight: 100 !important;
+    font-size: 1.2rem
+}
 .card light {
     font-weight: 100;
 }

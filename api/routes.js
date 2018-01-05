@@ -1,7 +1,7 @@
 const async = require('async');
 const JobSeeker = require('./helpers/JobSeeker');
 const Job = require('./db/Job');
-const queryJobs = require('./db/query.js');
+const db = require('./db/query.js');
 
 module.exports = (app, indexPath) => {
 
@@ -19,7 +19,7 @@ module.exports = (app, indexPath) => {
         async.parallel([
             callback => user.renderPDF(resume.data, callback),
 
-            callback => queryJobs(query, location, jobs => {
+            callback => db.queryJobs(query, location, jobs => {
                 // check if any jobs were found in the query, if not, end the request
                 if (jobs) {
                     callback(null, jobs);
@@ -33,6 +33,22 @@ module.exports = (app, indexPath) => {
             user.matchJobs(results[1]);
             user.sortJobsBy('matches');
             res.send(user);
+        });
+    });
+
+    app.get('/api/job/:id', (req, res) => {
+        let { id } = req.params || "";
+
+        if (id === "") {
+            res.end('Empty ID');
+        }
+
+        db.queryById(id, (err, job) => {
+            if (!err) {
+                res.send(job);
+            } else {
+                res.send(err);
+            }
         });
     });
 
