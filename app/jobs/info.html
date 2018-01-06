@@ -24,6 +24,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
 
   <link rel="stylesheet" href="../css/custom.css">
+  <link rel="stylesheet" href="../css/info.css">
+
 
 </head>
 
@@ -31,9 +33,96 @@
 
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
-  <div class="container">
-    <h1></h1>
-  </div>
+  <header>
+    <div class="container">
+      <h2 id="company"></h2>
+    </div>
+  </header>
+
+  <section style="margin-top: 3rem;">
+    <div class="container">
+
+      <div class="row">
+
+        <div id="left" class="four columns">
+
+          <div class="row section">
+            <h5>About</h5>
+            <hr>
+            <div class="property">
+              <strong>Title: </strong>
+              <span id="title"></span>
+            </div>
+
+            <div class="property">
+              <strong>Type: </strong>
+              <span id="type"></span>
+            </div>
+
+            <div class="property">
+              <strong>Location: </strong>
+              <span id="location"></span>
+            </div>
+
+            <div class="property">
+              <strong>Date: </strong>
+              <span id="date"></span>
+            </div>
+
+            <div class="property">
+              <strong>Source: </strong>
+              <span id="api"></span>
+            </div>
+
+            <div class="property">
+              <strong>How to apply: </strong>
+              <span id="url"></span>
+            </div>
+
+          </div>
+
+          <div class="row section">
+            <h5>Analytics</h5>
+            <hr>
+            <div class="property">
+              <strong>Matches: </strong>
+              <span id="matches"></span>
+            </div>
+            
+            <div class="property">
+              <strong>Resume: </strong>
+              <span id="numResume"></span>
+            </div>
+
+            <div class="property">
+              <strong>Amount: </strong>
+              <span id="numKeywords"></span>
+            </div>
+
+            <div class="property">
+              <strong>Matching keywords: </strong>
+              <span id="commons"></span>
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+        <div class="eight columns" id="desc">
+          <h5>Description</h5>
+          <hr>
+          <div id="description"></div>
+        </div>
+      </div>
+
+
+    </div>
+
+    </div>
+    </div>
+  </section>
 
   <!-- End Document
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
